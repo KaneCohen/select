@@ -146,7 +146,7 @@ function buildSelectOptions(
     options = [...defaultOptions];
   }
 
-  if (creatable && (!isLoading || (isLoading && !allowCreateWhileLoading))) {
+  if (creatable && (!isLoading || (isLoading && allowCreateWhileLoading))) {
     if (
       isValidNewOption(inputValue, cleanValue(value), options, {
         getOptionValue,

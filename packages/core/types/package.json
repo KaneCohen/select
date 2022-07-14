@@ -1,0 +1,4 @@
+{
+  "main": "dist/cohensive-select-core-types.cjs.js",
+  "module": "dist/cohensive-select-core-types.esm.js"
+}

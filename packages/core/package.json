@@ -1,0 +1,32 @@
+{
+  "name": "@cohensive/select-core",
+  "version": "0.1.0",
+  "description": "Select input",
+  "keywords": [
+    "select",
+    "combobox",
+    "tagging",
+    "tokens",
+    "tokenizer",
+    "chips",
+    "autocomplete",
+    "input"
+  ],
+  "author": {
+    "name": "Kane Cohen",
+    "email": "kanecohen@gmail.com"
+  },
+  "main": "dist/cohensive-select-core.cjs.js",
+  "module": "dist/cohensive-select-core.esm.js",
+  "types": "dist/cohensive-select-core.cjs.d.ts",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "memoize-one": "^6.0"
+  },
+  "preconstruct": {
+    "entrypoints": [
+      "index.ts",
+      "types.ts"
+    ]
+  }
+}

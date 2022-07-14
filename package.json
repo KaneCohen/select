@@ -1,0 +1,48 @@
+{
+  "name": "@cohensive/select",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Select",
+  "keywords": [
+    "select",
+    "combobox",
+    "tagging",
+    "tokens",
+    "tokenizer",
+    "chips",
+    "autocomplete",
+    "input"
+  ],
+  "author": {
+    "name": "Kane Cohen",
+    "email": "kanecohen@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaneCohen/select.git"
+  },
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@preconstruct/cli": "^2.1",
+    "typescript": "^4.2.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "preconstruct": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "browser": {
+  },
+  "scripts": {
+    "dev": "preconstruct dev",
+    "watch": "preconstruct watch",
+    "build": "preconstruct build",
+    "build-css": "npx tailwindcss -o demo/app.css"
+  }
+}

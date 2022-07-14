@@ -1,6 +1,6 @@
 {
   "name": "@cohensive/select-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Select input",
   "keywords": [
     "select",
@@ -26,6 +26,7 @@
   "preconstruct": {
     "entrypoints": [
       "index.ts",
+      "defaults.ts",
       "types.ts"
     ]
   }

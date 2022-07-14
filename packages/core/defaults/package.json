@@ -1,0 +1,4 @@
+{
+  "main": "dist/cohensive-select-core-defaults.cjs.js",
+  "module": "dist/cohensive-select-core-defaults.esm.js"
+}

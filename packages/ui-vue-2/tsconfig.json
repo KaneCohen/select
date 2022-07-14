@@ -13,7 +13,8 @@
     "skipLibCheck": true,
     "paths": {
       "@cohensive/select-core": ["../core"],
-      "@cohensive/select-core/types": ["../core/types"]
+      "@cohensive/select-core/types": ["../core/types"],
+      "@cohensive/select-core/defaults": ["../core/defaults"]
     }
   },
   "references": [

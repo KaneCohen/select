@@ -1,7 +1,6 @@
 {
   "name": "@cohensive/select",
   "version": "0.2.1",
-  "private": true,
   "description": "Select",
   "keywords": [
     "select",

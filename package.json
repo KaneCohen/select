@@ -2,6 +2,7 @@
   "name": "@cohensive/select",
   "version": "0.2.2",
   "description": "Select",
+  "private": true,
   "keywords": [
     "select",
     "combobox",

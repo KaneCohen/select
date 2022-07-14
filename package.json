@@ -1,6 +1,6 @@
 {
   "name": "@cohensive/select",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Select",
   "keywords": [
@@ -43,6 +43,8 @@
     "dev": "preconstruct dev",
     "watch": "preconstruct watch",
     "build": "preconstruct build",
-    "build-css": "npx tailwindcss -o demo/app.css"
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "yarn build && changeset publish"
   }
 }

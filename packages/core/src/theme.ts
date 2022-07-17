@@ -30,7 +30,7 @@ interface OptionProps extends CommonProps {
 export const theme = {
   container: 'relative',
   control: (props: ControlProps) => {
-    return `flex flex-wrap items-center justify-between outline-none border border-gray-300 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 ring-opacity-50' : ''}`;
+    return `flex flex-wrap items-center justify-between outline-none border border-solid border-gray-300 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 ring-opacity-50' : ''}`;
   },
   valueContainer: 'grid flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
   multipleValueContainer: 'flex flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
@@ -55,7 +55,7 @@ export const theme = {
   dropdownIndicator: (props: DropdownIndicatorProps) => {
     return `p-2 transition-opacity ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'}`;
   },
-  menu: 'absolute z-10 w-full mt-2 py-1 overflow-auto border border-gray-300 bg-white rounded-md shadow-lg',
+  menu: 'absolute z-10 w-full mt-2 py-1 overflow-auto border border-solid border-gray-300 bg-white rounded-md shadow-lg',
   noOptionsMessage: 'text-center text-gray-400',
   group: (props: GroupProps) => {
     return '';

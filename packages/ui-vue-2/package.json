@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@cohensive/select-core": "^0.3",
+    "@cohensive/select-core": "^0.4",
     "@emotion/css": "^11.9.0",
     "vue": "^2.6.12"
   },

@@ -1,5 +1,5 @@
 import Vue, { CreateElement, VNode } from 'vue';
-import { SelectGroup, SelectOption, SelectOptionOrGroup } from '../../core/src/types';
+import { SelectGroup, SelectOption, SelectOptionOrGroup } from "@cohensive/select-core/types";
 import Group from './Group';
 import Option from './Option';
 import { commonProps } from './props';

@@ -33,7 +33,7 @@ export const selectProps = {
 
   classNamePrefix: {
     type: String,
-    default: defaults.classNamePrefix
+    default: 'vue-select'
   },
 
   clearable: {

@@ -757,6 +757,7 @@ class Select extends EventEmitter {
     }
     this.scrollToFocusedOptionOnUpdate = true;
     this.setState({
+      focusedValue: [],
       focusedOption: options[nextFocus],
     });
     this.emit('focus-option');
@@ -921,6 +922,8 @@ class Select extends EventEmitter {
         }
         return;
       default:
+        this.clearFocusedValue();
+
         if (multiple && delimiters.includes(event.key)) {
           if ((!multiple && !isOpen) || event.keyCode === 229) {
             // Ignore keydown event from Input Method Editor (IME)
@@ -1271,6 +1274,14 @@ class Select extends EventEmitter {
     });
   }
 
+  clearFocusedValue() {
+    if (this.state.focusedValue.length) {
+      this.setState({
+        focusedValue: []
+      });
+    }
+  }
+
   copyFocusedValue() {
     const props = this.props;
     let copyString = this.getFocusedValue()
@@ -1392,7 +1403,7 @@ class Select extends EventEmitter {
 
   getClass = (name: string): string => {
     if (!this.props.classNamePrefix) {
-      return name;
+      return '';
     }
     return this.props.classNamePrefix + '__' + name;
   };

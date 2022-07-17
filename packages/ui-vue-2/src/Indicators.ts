@@ -99,6 +99,10 @@ function renderClearIndicator(h: CreateElement, props: CommonProps): VNode {
     select.getClass('clear-indicator')
   ];
 
+  if (select.state.isFocused) {
+    classes.push(select.getClass('clear-indicator--is-focused'));
+  }
+
   let child = props.slots['clear-indicator'] ? props.slots['clear-indicator']({props}) : renderCross(h, 20);
 
   return h(
@@ -141,6 +145,10 @@ function renderDropdownIndicator(h: CreateElement, props: CommonProps): VNode {
     select.getThemeClass('dropdownIndicator', {focused: select.state.isFocused}),
     select.getClass('dropdown-indicator')
   ];
+
+  if (select.state.isFocused) {
+    classes.push(select.getClass('dropdown-indicator--is-focused'));
+  }
 
   let child = props.slots['dropdown-indicator'] ? props.slots['dropdown-indicator']({props}) : renderDropdown(h, 20);
 

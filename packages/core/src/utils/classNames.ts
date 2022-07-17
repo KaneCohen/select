@@ -1,7 +1,7 @@
 import { ClassNamesState } from "../types";
 
 function applyPrefixToName(prefix: string, name: string): string {
-  if (name) {
+  if (!name) {
     return prefix;
   } else if (name[0] === '-') {
     return prefix + name;

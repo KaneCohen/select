@@ -60,7 +60,8 @@
 
 .vue-select__multiple-value {
   @apply flex;
-  @apply items-center;
+  @apply items-stretch;
+  @apply content-center;
   @apply m-0.5;
   @apply first:ml-0;
   @apply rounded;
@@ -85,9 +86,14 @@
 
 .vue-select__multiple-value-remove {
   @apply flex;
+  @apply items-center;
   @apply px-1;
   @apply rounded;
   @apply box-border;
+  @apply border-0;
+  @apply bg-transparent;
+  @apply opacity-50;
+  @apply hover:opacity-100;
 }
 
 .vue-select__input-container {

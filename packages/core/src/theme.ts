@@ -38,10 +38,10 @@ export const theme = {
   value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full whitespace-pre text-ellipsis overflow-hidden',
   multipleValue: (props: MultipleValueProps) => {
     const isFocused = props.getFocusedValue().indexOf(props.value) >= 0;
-    return `flex items-center m-0.5 first:ml-0 rounded box-border bg-gray-300 ${isFocused ? 'ring-1 ring-gray-500 ring-inset' : ''}`;
+    return `flex items-stretch content-center m-0.5 first:ml-0 rounded box-border bg-gray-300 ${isFocused ? 'ring-1 ring-gray-500 ring-inset' : ''}`;
   },
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
-  multipleValueRemove: 'flex px-1 rounded box-border',
+  multipleValueRemove: 'flex items-center px-1 rounded box-border opacity-50 hover:opacity-100',
   inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3',
   input: 'w-full row-start-1 col-start-2 row-end-auto col-end-auto outline-none border-0 bg-transparent',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',

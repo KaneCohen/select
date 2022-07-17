@@ -9,7 +9,6 @@ import {
 } from './builtins';
 import { SelectConfigs, CreatableConfigs, State, AsyncConfigs } from './types';
 import { createFilter, isMobileDevice, isTouchCapable } from './utils';
-import { theme } from './theme';
 
 export const selectConfigs: SelectConfigs = {
   autoFocus: false,
@@ -93,7 +92,7 @@ export const selectConfigs: SelectConfigs = {
   setValueOnBlur: false,
   setValueOnPaste: true,
   tabIndex: '0',
-  theme: theme,
+  theme: null,
   value: [],
 };
 

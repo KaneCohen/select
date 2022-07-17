@@ -21,7 +21,10 @@ export default Vue.extend({
 
   render(h: CreateElement): VNode {
     const { select, option, selected, focused, id } = this.$props;
-    const classes: string[] = [select.getThemeClass('option', {option, selected, focused})];
+    const classes: string[] = [
+      select.getThemeClass('option', {option, selected, focused}),
+      select.getClass('option'),
+    ];
 
     if (option.disabled) {
       classes.push(select.getClass('option--is-disabled'));

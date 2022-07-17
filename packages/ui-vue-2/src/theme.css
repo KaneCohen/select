@@ -7,7 +7,8 @@
   @apply flex-wrap;
   @apply items-center;
   @apply justify-between;
-  @apply border outline-none;
+  @apply border;
+  @apply outline-none;
   @apply border-gray-300;
   @apply rounded-md shadow-sm;
 }
@@ -104,6 +105,7 @@
   @apply row-end-auto;
   @apply col-end-auto;
   @apply outline-none;
+  @apply border-0;
   @apply bg-transparent;
 }
 

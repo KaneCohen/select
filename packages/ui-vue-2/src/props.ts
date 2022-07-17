@@ -326,6 +326,11 @@ export const selectProps = {
     default: defaults.setValueOnPaste
   },
 
+  tailwind: {
+    type: Boolean,
+    default: false
+  },
+
   tabIndex: {
     type: String,
     default: defaults.tabIndex

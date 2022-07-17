@@ -1393,6 +1393,10 @@ class Select extends EventEmitter {
     name: string,
     props: { [name: string]: any } = {}
   ): string => {
+    if (!this.props.theme) {
+      return '';
+    }
+
     const themeClass = this.props.theme[name];
     if (typeof themeClass === 'function') {
       return themeClass({ ...this.getCommonProps(), ...props }) || '';

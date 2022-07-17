@@ -471,7 +471,7 @@ export type SelectConfigs = {
   /**
    * Sets object specifying class-based theming of the components.
    */
-  theme?: Theme;
+  theme?: Theme | null;
 
   /**
    * Sets the select value.

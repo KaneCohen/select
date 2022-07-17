@@ -1,5 +1,5 @@
 import Vue, { CreateElement, VNode } from 'vue';
-import Select from '@cohensive/select-core';
+import Select, { theme } from '@cohensive/select-core';
 import Props from './props';
 import Container from './Container';
 
@@ -9,8 +9,12 @@ export default Vue.extend({
   props: Props,
 
   data() {
+    let props: any = this.$props;
+    if (props.tailwind) {
+      props.theme = theme;
+    }
     return {
-      select: new Select(this.$props)
+      select: new Select(props)
     };
   },
 

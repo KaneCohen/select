@@ -43,7 +43,7 @@ export const theme = {
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
   multipleValueRemove: 'flex px-1 rounded box-border',
   inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3',
-  input: 'w-full row-start-1 col-start-2 row-end-auto col-end-auto outline-none bg-transparent',
+  input: 'w-full row-start-1 col-start-2 row-end-auto col-end-auto outline-none border-0 bg-transparent',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',
   indicators: 'flex items-center',
   loadingIndicator: 'flex gap-1 p-2',

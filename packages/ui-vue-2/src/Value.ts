@@ -51,14 +51,20 @@ export default {
           h(
             'div',
             {
-              class: select.getThemeClass('multipleValueLabel', {value: option})
+              class: [
+                select.getThemeClass('multipleValueLabel', {value: option}),
+                select.getClass('multiple-value-label'),
+              ]
             },
             [label]
           ),
           h(
             'button',
             {
-              class: select.getThemeClass('multipleValueRemove', {value: option}),
+              class: [
+                select.getThemeClass('multipleValueRemove', {value: option}),
+                select.getClass('multiple-value-remove'),
+              ],
               on: {
                 click() {
                   select.removeValue(option)
@@ -75,7 +81,7 @@ export default {
       'div',
       {
         key: id,
-        class: select.getThemeClass('value', {value: option})
+        class: classes,
       },
       [label]
     );

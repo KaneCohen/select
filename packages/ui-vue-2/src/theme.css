@@ -70,9 +70,11 @@
 }
 
 .vue-select__multiple-value--is-focused {
-  @apply ring-1;
+  @apply ring-offset-0;
+  @apply ring-offset-black;
   @apply ring-gray-500;
   @apply ring-inset;
+  @apply ring-1;
 }
 
 .vue-select__multiple-value-label {

@@ -1,6 +1,6 @@
 {
   "name": "@cohensive/select-vue-2",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Select input UI for Vue 2",
   "keywords": [
     "select",

@@ -20,7 +20,7 @@ export default {
     ];
 
     if (multiple && isFocused) {
-      classes.push('multiple-value--is-focused');
+      classes.push(select.getClass('multiple-value--is-focused'));
     }
 
     let label = slots['value-label']

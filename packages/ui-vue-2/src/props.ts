@@ -336,6 +336,11 @@ export const selectProps = {
     default: defaults.tabIndex
   },
 
+  spacing: {
+    type: Object,
+    default: () => defaults.spacing
+  },
+
   theme: {
     type: Object,
     default: () => defaults.theme

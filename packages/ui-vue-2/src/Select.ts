@@ -9,7 +9,7 @@ export default Vue.extend({
   props: Props,
 
   data() {
-    let props: any = this.$props;
+    let props: any = {...this.$props};
     if (props.tailwind) {
       props.theme = theme;
     }
@@ -21,7 +21,11 @@ export default Vue.extend({
   watch: {
     $props: {
       handler(n, p) {
-        this.select.setProps(this.$props);
+        let props: any = {...this.$props};
+        if (props.tailwind) {
+          props.theme = theme;
+        }
+        this.select.setProps(props);
       },
       deep: true,
       immediate: true,

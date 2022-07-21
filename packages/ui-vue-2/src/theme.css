@@ -132,6 +132,7 @@
 
 .vue-select__loading-indicator {
   @apply flex;
+  @apply items-center;
   @apply gap-1;
   @apply p-2;
 }
@@ -144,6 +145,8 @@
 }
 
 .vue-select__clear-indicator {
+  @apply flex;
+  @apply items-center;
   @apply p-2;
   @apply transition-opacity;
   @apply opacity-20;
@@ -163,6 +166,8 @@
 }
 
 .vue-select__dropdown-indicator {
+  @apply flex;
+  @apply items-center;
   @apply p-2;
   @apply transition-opacity;
   @apply opacity-20;
@@ -178,7 +183,7 @@
   @apply absolute;
   @apply z-10;
   @apply w-full;
-  @apply mt-2;
+  @apply my-2;
   @apply py-1;
   @apply overflow-auto;
   @apply border;
@@ -187,6 +192,14 @@
   @apply bg-white;
   @apply rounded-md;
   @apply shadow-lg;
+}
+
+.vue-select__menu--top {
+  @apply bottom-full;
+}
+
+.vue-select__menu--bottom {
+  @apply top-full;
 }
 
 .vue-select__no-options-message {

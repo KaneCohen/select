@@ -72,7 +72,14 @@ export type SelectOptionsOrGroups = SelectOptionOrGroup[];
 
 export type MenuPlacement = 'auto' | 'bottom' | 'top';
 
+export type CoercedMenuPlacement = 'bottom' | 'top';
+
 export type MenuPosition = 'absolute' | 'fixed';
+
+export interface MenuState {
+  placement: CoercedMenuPlacement | null;
+  maxHeight: number;
+}
 
 export type FormatOptionLabelContext = 'menu' | 'control';
 
@@ -85,6 +92,12 @@ export interface FormatOptionLabelMeta {
 export interface Accessors<Option> {
   getOptionValue: GetOptionValue<Option>;
   getOptionLabel: GetOptionLabel<Option>;
+};
+
+export interface Spacing {
+  baseUnit: number;
+  controlHeight: number;
+  menuGutter: number;
 };
 
 export interface Theme {
@@ -462,6 +475,11 @@ export type SelectConfigs = {
    * Sets value to select if paste event is caught by the input.
    */
   setValueOnPaste?: boolean;
+
+  /**
+   * Sets control spacing.
+   */
+  spacing?: Spacing;
 
   /**
    * Sets tab index attribute for the select input.

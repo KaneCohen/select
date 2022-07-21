@@ -14,6 +14,19 @@ export default Vue.extend({
 
   mounted() {
     this.select.setMenuListRef(this.$el);
+    const placement = this.select.getMenuPlacement(this.$el);
+
+    this.$el.classList.remove(...this.$el.classList);
+    this.$el.classList.add(
+      ...[
+        ...this.select.getThemeClass(`menu`, placement).split(' '),
+        this.select.getClass('menu'),
+        this.select.getClass(`menu--${placement.placement}`)
+      ].filter((v: string) => v.length),
+    );
+    (this.$el as HTMLElement).style.maxHeight = `${placement.maxHeight}px`;
+
+    this.select.scrollToMenu(this.$el, placement.placement);
   },
 
   render(h: CreateElement): VNode {
@@ -70,9 +83,6 @@ export default Vue.extend({
       'div',
       {
         class: [...classes].filter((v: string) => v.length),
-        style: {
-          maxHeight: `${select.props.maxMenuHeight}px`,
-        },
         on: {
           mousedown(e: MouseEvent) {
             select.onMenuMouseDown(e);

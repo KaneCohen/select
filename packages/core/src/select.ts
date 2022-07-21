@@ -20,8 +20,11 @@ import {
   FocusDirection,
   FormatOptionLabelContext,
   OptionsOrGroups,
+  MenuState,
+  CoercedMenuPlacement
 } from './types';
 import { debounce, cleanValue, isDocumentElement, notNullish, scrollIntoView } from './utils';
+import { getPenuPlacement, scrollToMenu } from './utils/menuPlacement';
 
 let instanceId = 0;
 
@@ -1456,6 +1459,30 @@ class Select extends EventEmitter {
       ? lastFocusedOption
       : options[0] || null;
   };
+
+  getMenuPlacement = (menuEl: HTMLDivElement | null): MenuState => {
+    const { props } = this;
+    return getPenuPlacement({
+      maxHeight: props.maxMenuHeight,
+      menuEl: menuEl,
+      minHeight: props.minMenuHeight,
+      placement: props.menuPlacement,
+      spacing: props.spacing,
+      shouldScroll: props.menuShouldScrollIntoView,
+      isFixedPosition: props.menuPosition === 'fixed'
+    });
+  }
+
+  scrollToMenu = (menuEl: HTMLDivElement, placement: CoercedMenuPlacement): void => {
+    const { props } = this;
+    if (props.menuShouldScrollIntoView) {
+      scrollToMenu({
+        menuEl: menuEl,
+        placement: placement,
+        isFixedPosition: props.menuPosition === 'fixed'
+      });
+    }
+  }
 
   /**
    * Helpers

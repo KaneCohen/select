@@ -74,7 +74,7 @@ export const selectConfigs: SelectConfigs = {
   menuShouldBlockScroll: false,
   menuShouldScrollIntoView: !isMobileDevice(),
   minInputLength: 0,
-  minMenuHeight: undefined,
+  minMenuHeight: 140,
   multiple: false,
   name: undefined,
   noOptionsMessage: () => 'No options',
@@ -91,6 +91,11 @@ export const selectConfigs: SelectConfigs = {
   searchable: false,
   setValueOnBlur: false,
   setValueOnPaste: true,
+  spacing: {
+    baseUnit: 4,
+    controlHeight: 38,
+    menuGutter: 8
+  },
   tabIndex: '0',
   theme: null,
   value: [],

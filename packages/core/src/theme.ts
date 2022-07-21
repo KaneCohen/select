@@ -17,6 +17,11 @@ interface DropdownIndicatorProps extends CommonProps {
   focused: boolean;
 }
 
+interface MenuProps extends CommonProps {
+  placement: 'top' | 'bottom';
+  maxHeight: number;
+}
+
 interface GroupProps extends CommonProps {
   group: Group;
 }
@@ -55,7 +60,9 @@ export const theme = {
   dropdownIndicator: (props: DropdownIndicatorProps) => {
     return `p-2 transition-opacity ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'}`;
   },
-  menu: 'absolute z-10 w-full mt-2 py-1 overflow-auto border border-solid border-gray-300 bg-white rounded-md shadow-lg',
+  menu: (props: MenuProps) => {
+    return `absolute z-10 w-full my-2 py-1 overflow-auto border border-solid border-gray-300 bg-white rounded-md shadow-lg ${props.placement === 'top' ? 'bottom-full' : 'top-full'}`;
+  },
   noOptionsMessage: 'text-center text-gray-400',
   group: (props: GroupProps) => {
     return '';

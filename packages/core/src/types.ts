@@ -78,6 +78,7 @@ export type MenuPosition = 'absolute' | 'fixed';
 
 export interface MenuState {
   placement: CoercedMenuPlacement | null;
+  shouldScroll: boolean;
   maxHeight: number;
 }
 

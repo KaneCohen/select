@@ -26,7 +26,9 @@ export default Vue.extend({
     );
     (this.$el as HTMLElement).style.maxHeight = `${placement.maxHeight}px`;
 
-    this.select.scrollToMenu(this.$el, placement.placement);
+    if (placement.shouldScroll) {
+      this.select.scrollToMenu(this.$el, placement.placement);
+    }
   },
 
   render(h: CreateElement): VNode {

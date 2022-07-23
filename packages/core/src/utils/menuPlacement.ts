@@ -156,7 +156,7 @@ export function getPenuPlacement({
   isFixedPosition
 }: PlacementArgs): MenuState {
   const scrollParent = getScrollParent(menuEl!);
-  const defaultState: MenuState = { placement: 'bottom', maxHeight };
+  const defaultState: MenuState = { placement: 'bottom', maxHeight, shouldScroll: false };
 
   // something went wrong, return default state
   if (!menuEl || !menuEl.offsetParent) return defaultState;
@@ -190,12 +190,12 @@ export function getPenuPlacement({
     case 'bottom':
       // 1: the menu will fit, do nothing
       if (viewSpaceBelow >= menuHeight) {
-        return { placement: 'bottom', maxHeight };
+        return { placement: 'bottom', shouldScroll: false, maxHeight };
       }
 
       // 2: the menu will fit, if scrolled
       if (scrollSpaceBelow >= menuHeight && !isFixedPosition) {
-        return { placement: 'bottom', maxHeight };
+        return { placement: 'bottom', shouldScroll: true, maxHeight };
       }
 
       // 3: the menu will fit, if constrained
@@ -211,6 +211,7 @@ export function getPenuPlacement({
 
         return {
           placement: 'bottom',
+          shouldScroll: true,
           maxHeight: constrainedHeight,
         };
       }
@@ -230,7 +231,7 @@ export function getPenuPlacement({
           );
         }
 
-        return { placement: 'top', maxHeight: constrainedHeight };
+        return { placement: 'top', shouldScroll: false, maxHeight: constrainedHeight };
       }
 
       // BOTTOM: allow browser to increase scrollable area and immediately set scroll
@@ -238,18 +239,18 @@ export function getPenuPlacement({
         if (shouldScroll) {
           scrollTo(scrollParent, scrollDown);
         }
-        return { placement: 'bottom', maxHeight };
+        return { placement: 'bottom', shouldScroll: false, maxHeight };
       }
       break;
     case 'top':
       // 1: the menu will fit, do nothing
       if (viewSpaceAbove >= menuHeight) {
-        return { placement: 'top', maxHeight };
+        return { placement: 'top', shouldScroll: false, maxHeight };
       }
 
       // 2: the menu will fit, if scrolled
       if (scrollSpaceAbove >= menuHeight && !isFixedPosition) {
-        return { placement: 'top', maxHeight };
+        return { placement: 'top', shouldScroll: true, maxHeight };
       }
 
       // 3: the menu will fit, if constrained
@@ -272,6 +273,7 @@ export function getPenuPlacement({
 
         return {
           placement: 'top',
+          shouldScroll: true,
           maxHeight: constrainedHeight,
         };
       }
@@ -279,7 +281,7 @@ export function getPenuPlacement({
       // 4. not enough space, the browser WILL NOT increase scrollable area when
       // absolutely positioned element rendered above the viewport (only below).
       // Flip the menu, render below
-      return { placement: 'bottom', maxHeight };
+      return { placement: 'bottom', shouldScroll: false, maxHeight };
     default:
       throw new Error(`Invalid placement provided "${placement}".`);
   }

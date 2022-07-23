@@ -20,7 +20,7 @@ export default Vue.extend({
 
   watch: {
     $props: {
-      handler(n, p) {
+      handler() {
         let props: any = {...this.$props};
         if (props.tailwind) {
           props.theme = theme;

@@ -48,7 +48,6 @@ export default defineComponent({
       {
         class: [...classes].filter((v: string) => v.length),
         onMousedown(e: MouseEvent) {
-          console.log('mousedown', select.instancePrefix, select);
           select.onControlMouseDown(e);
         },
       },

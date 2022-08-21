@@ -226,7 +226,7 @@ class Select extends EventEmitter {
   asyncInputChange: (inputValue: string) => void = () => {};
   asyncCache: {[name: string]: OptionsOrGroups} = {};
 
-  private _state: State;
+  protected _state: State;
 
   get state(): State {
     return Object.seal(this._state);
@@ -249,9 +249,18 @@ class Select extends EventEmitter {
     this.inputRef = ref;
   };
 
-  focusedOptionRef: HTMLInputElement | null = null;
-  setFocusedOptionRef = (ref: HTMLInputElement) => {
+  focusedOptionRef: HTMLDivElement | null = null;
+  setFocusedOptionRef = (ref: HTMLDivElement) => {
     this.focusedOptionRef = ref;
+
+    if (
+      this.menuListRef &&
+      this.focusedOptionRef &&
+      this.scrollToFocusedOptionOnUpdate
+    ) {
+      scrollIntoView(this.menuListRef, this.focusedOptionRef);
+      this.scrollToFocusedOptionOnUpdate = false;
+    }
   };
 
   constructor(props: SelectConfigs = {}) {
@@ -288,21 +297,21 @@ class Select extends EventEmitter {
     const value = cleanValue(this.props.value);
 
     this.setState({
-      ...this.state,
+      ...this._state,
       ...{
         options:
           this.props.options === undefined
-            ? this.state.options
+            ? this._state.options
             : this.props.options,
         isOpen:
-          this.props.open === undefined ? this.state.isOpen : this.props.open,
+          this.props.open === undefined ? this._state.isOpen : this.props.open,
         isFocused:
           this.props.focused === undefined
-            ? this.state.isFocused
+            ? this._state.isFocused
             : this.props.focused,
         isLoading:
           this.props.loading === undefined
-            ? this.state.isLoading
+            ? this._state.isLoading
             : this.props.loading,
         inputValue: this.props.inputValue || '',
         value: value.slice(0, this.props.maxValues),
@@ -363,12 +372,12 @@ class Select extends EventEmitter {
 
     const { openMenuOnClick } = this.props;
 
-    if (!this.state.isFocused) {
+    if (!this._state.isFocused) {
       if (openMenuOnClick) {
         this.openAfterFocus = true;
       }
       this.focusInput();
-    } else if (!this.state.isOpen) {
+    } else if (!this._state.isOpen) {
       if (openMenuOnClick) {
         this.open();
       }
@@ -401,7 +410,7 @@ class Select extends EventEmitter {
 
     this.focusInput();
 
-    if (this.state.isOpen) {
+    if (this._state.isOpen) {
       this.setState({ inputIsHiddenAfterUpdate: !multiple });
       this.onMenuClose();
     } else {
@@ -588,13 +597,13 @@ class Select extends EventEmitter {
    */
 
   onMenuOpen(): void {
-    if (this.state.isOpen) return;
+    if (this._state.isOpen) return;
 
     if (this.props.onMenuOpen) {
       this.props.onMenuOpen();
     }
 
-    if (this.state.inputValue.length >= this.props.minInputLength) {
+    if (this._state.inputValue.length >= this.props.minInputLength) {
       this.setState({
         isOpen: this.props.open !== undefined ? this.props.open : true,
       });
@@ -626,7 +635,7 @@ class Select extends EventEmitter {
 
   onInputChange(value: string, actionMeta: InputActionMeta): void {
     let newValue;
-    const { inputIsHiddenAfterUpdate } = this.state;
+    const { inputIsHiddenAfterUpdate } = this._state;
 
     if (typeof this.props.onInputChange === 'function') {
       newValue = this.props.onInputChange(value, actionMeta);
@@ -639,7 +648,7 @@ class Select extends EventEmitter {
       inputIsHiddenAfterUpdate: undefined,
     });
 
-    if (this.state.isOpen) {
+    if (this._state.isOpen) {
       this.setState({
         focusedOption: this.getFocusedOption(),
       });
@@ -653,7 +662,7 @@ class Select extends EventEmitter {
     const inputValue = (event.currentTarget as HTMLInputElement).value;
     this.setState({ inputIsHiddenAfterUpdate: false });
 
-    if (this.state.focusedOption && this.state.focusedOption.__isNew__) {
+    if (this._state.focusedOption && this._state.focusedOption.__isNew__) {
       this.setState({
         focusedOption: null,
       });
@@ -682,7 +691,7 @@ class Select extends EventEmitter {
   };
 
   onInputFocus = (event: FocusEvent): void => {
-    const { inputValue: prevInputValue } = this.state;
+    const { inputValue: prevInputValue } = this._state;
     this.onInputChange('', { action: 'input-focus', prevInputValue });
 
     if (this.props.onFocus) {
@@ -704,7 +713,7 @@ class Select extends EventEmitter {
   };
 
   onInputBlur = (event: FocusEvent): void => {
-    const { inputValue: prevInputValue } = this.state;
+    const { inputValue: prevInputValue } = this._state;
     if (this.menuListRef && this.menuListRef.contains(document.activeElement)) {
       this.inputRef!.focus();
       return;
@@ -723,7 +732,7 @@ class Select extends EventEmitter {
   };
 
   onOptionHover = (focusedOption: Option): void => {
-    if (this.blockOptionHover || this.state.focusedOption === focusedOption) {
+    if (this.blockOptionHover || this._state.focusedOption === focusedOption) {
       return;
     }
     this.setState({ focusedOption });
@@ -735,7 +744,7 @@ class Select extends EventEmitter {
 
   focusOption = (direction: FocusDirection = 'first') => {
     const { pageSize } = this.props;
-    const { focusedOption } = this.state;
+    const { focusedOption } = this._state;
     const options = this.getFocusableOptions();
 
     if (!options.length) return;
@@ -797,7 +806,7 @@ class Select extends EventEmitter {
       backspaceRemovesValue,
       delimiters,
     } = this.props;
-    const { isOpen, isDisabled, inputValue, focusedValue } = this.state;
+    const { isOpen, isDisabled, inputValue, focusedValue } = this._state;
     const focusedOption = this.getFocusedOption();
 
     if (isDisabled) return;
@@ -814,6 +823,7 @@ class Select extends EventEmitter {
 
     const el = event.currentTarget as HTMLInputElement;
     const action = keyMap[event.code] || event.code;
+
 
     switch (action) {
       case 'Escape':
@@ -925,7 +935,9 @@ class Select extends EventEmitter {
         }
         return;
       default:
-        this.clearFocusedValue();
+        if (!(event.ctrlKey || event.shiftKey) && focusedValue.length) {
+          this.clearFocusedValue();
+        }
 
         if (multiple && delimiters.includes(event.key)) {
           if ((!multiple && !isOpen) || event.keyCode === 229) {
@@ -966,7 +978,7 @@ class Select extends EventEmitter {
 
   selectOption = (newValue: Option) => {
     const { getNewOptionData, blurInputOnSelect, multiple, name } = this.props;
-    const { value, inputValue } = this.state;
+    const { value, inputValue } = this._state;
     const deselected = multiple && this.isOptionSelected(newValue, value);
     const isDisabled = this.isOptionDisabled(newValue, value);
 
@@ -1003,11 +1015,11 @@ class Select extends EventEmitter {
   };
 
   getValue = (): Value => {
-    return this.state.value;
+    return this._state.value;
   };
 
   getFocusedValue = (): Value => {
-    return this.props.multiple ? this.state.focusedValue : this.state.value;
+    return this.props.multiple ? this._state.focusedValue : this._state.value;
   };
 
   removeValue(removedValue: Option | Options): Select {
@@ -1038,7 +1050,7 @@ class Select extends EventEmitter {
   }
 
   clearValue = (): Select => {
-    const { value } = this.state;
+    const { value } = this._state;
 
     this.onChange([], {
       action: 'clear',
@@ -1069,7 +1081,7 @@ class Select extends EventEmitter {
   blur = this.blurInput;
 
   open(focusOption: 'first' | 'last' = 'first'): Select {
-    const { value, isFocused } = this.state;
+    const { value, isFocused } = this._state;
     const focusableOptions = this.buildFocusableOptions();
     let openAtIndex = focusOption === 'first' ? 0 : focusableOptions.length - 1;
 
@@ -1102,7 +1114,7 @@ class Select extends EventEmitter {
   }
 
   setState(props: Partial<State>): Select {
-    this._state = { ...this.state, ...props };
+    this._state = { ...this._state, ...props };
     this.emit('state-updated');
     return this;
   }
@@ -1118,7 +1130,7 @@ class Select extends EventEmitter {
       getOptionValue,
       getOptionLabel,
     } = this.props;
-    const { value, options, isLoading } = this.state;
+    const { value, options, isLoading } = this._state;
 
     if (isLoading && !allowCreateWhileLoading) return;
     if (
@@ -1142,8 +1154,8 @@ class Select extends EventEmitter {
         this.setState({
           options:
             createOptionPosition === 'first'
-              ? [newOption, ...this.state.options]
-              : [...this.state.options, newOption],
+              ? [newOption, ...this._state.options]
+              : [...this._state.options, newOption],
         });
       }
     }
@@ -1154,7 +1166,7 @@ class Select extends EventEmitter {
     shiftKey: boolean = false,
     ctrlKey: boolean = false
   ): void {
-    const { focusedValue, value } = this.state;
+    const { focusedValue, value } = this._state;
     const focusedIndex = value.indexOf(option);
     const firstFocusedIndex = Math.min(
       focusedIndex,
@@ -1199,7 +1211,7 @@ class Select extends EventEmitter {
     direction: 'prev' | 'next' | 'all',
     multiple: boolean = false
   ): void {
-    const { focusedValue, value } = this.state;
+    const { focusedValue, value } = this._state;
     const last = value.length - 1;
     let sortedFocusedValue = Array(value.length);
     let nextFocusedValue: Options = [];
@@ -1278,7 +1290,7 @@ class Select extends EventEmitter {
   }
 
   clearFocusedValue() {
-    if (this.state.focusedValue.length) {
+    if (this._state.focusedValue.length) {
       this.setState({
         focusedValue: []
       });
@@ -1297,7 +1309,7 @@ class Select extends EventEmitter {
   }
 
   pasteValue(e: ClipboardEvent) {
-    const { options, value } = this.state;
+    const { options, value } = this._state;
     const {
       creatable,
       delimiters,
@@ -1432,27 +1444,27 @@ class Select extends EventEmitter {
   };
 
   buildSelectOptions() {
-    return buildSelectOptions(this.props, this.state, this.state.value);
+    return buildSelectOptions(this.props, this._state, this._state.value);
   }
 
   getSelectOptions(): SelectOptionsOrGroups {
-    return this.state.isOpen
+    return this._state.isOpen
       ? this.buildSelectOptions().slice(0, this.props.maxOptions)
       : [];
   }
 
   buildFocusableOptions(): Options {
-    return buildFocusableOptions(this.props, this.state, this.state.value);
+    return buildFocusableOptions(this.props, this._state, this._state.value);
   }
 
   getFocusableOptions(): Options {
-    return this.state.isOpen
+    return this._state.isOpen
       ? this.buildFocusableOptions().slice(0, this.props.maxOptions)
       : [];
   }
 
   getFocusedOption = (): Option | null => {
-    const { focusedOption: lastFocusedOption } = this.state;
+    const { focusedOption: lastFocusedOption } = this._state;
     const options = this.getFocusableOptions();
     return lastFocusedOption &&
       options.map((o) => o.value).indexOf(lastFocusedOption.value) > -1
@@ -1492,11 +1504,11 @@ class Select extends EventEmitter {
   };
 
   hasValue(): boolean {
-    return this.state.value.length > 0;
+    return this._state.value.length > 0;
   }
 
   hasOptions(): boolean {
-    return this.state.options.length > 0;
+    return this._state.options.length > 0;
   }
 
   isClearable(): boolean {
@@ -1522,7 +1534,7 @@ class Select extends EventEmitter {
   formatOptionLabel(option: Option, context: FormatOptionLabelContext): any {
     if (typeof this.props.formatOptionLabel === 'function') {
       const { inputValue } = this.props;
-      const { value } = this.state;
+      const { value } = this._state;
       return this.props.formatOptionLabel(option, {
         context,
         inputValue,
@@ -1533,7 +1545,7 @@ class Select extends EventEmitter {
     }
   }
 
-  formatGroupLabel(group: Group) {
+  formatGroupLabel(group: Group): any {
     if (typeof this.props.formatGroupLabel === 'function') {
       return this.props.formatGroupLabel(group);
     } else {

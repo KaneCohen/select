@@ -212,7 +212,7 @@ export function getPenuPlacement({
         return {
           placement: 'bottom',
           shouldScroll: true,
-          maxHeight: constrainedHeight,
+          maxHeight: Math.min(constrainedHeight, maxHeight),
         };
       }
 
@@ -274,7 +274,7 @@ export function getPenuPlacement({
         return {
           placement: 'top',
           shouldScroll: true,
-          maxHeight: constrainedHeight,
+          maxHeight: Math.min(constrainedHeight, maxHeight),
         };
       }
 

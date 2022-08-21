@@ -7,23 +7,29 @@ export default {
   functional: true,
 
   render(h: CreateElement, { props }: { props: GroupProps }): VNode {
-    const { select, slots, group, children } = props;
-    const classes: string[] = [select.getThemeClass('group'), select.getClass('group')];
-    const labelClasses = [select.getThemeClass('groupLabel'), select.getClass('group-label')];
-    const groupId: string = `${select.getElementId('group')}-${group.index}`;
+    const {
+      slots,
+      getClass,
+      getThemeClass,
+      formatGroupLabel,
+      children,
+      id
+    } = props;
+    const classes: string[] = [getThemeClass('group'), getClass('group')];
+    const labelClasses = [getThemeClass('groupLabel'), getClass('group-label')];
 
     let label = slots['group']
       ? slots['group']({props})
-      : select.formatGroupLabel(group.data);
+      : formatGroupLabel();
 
     return h(
       'div',
       {
         class: [...classes].filter((v: string) => v.length),
         attrs: {
-          id: groupId
+          id
         },
-        key: groupId
+        key: id
       },
       [
         h('div',

@@ -1,4 +1,5 @@
 export { default as debounce } from './debounce';
+export { default as throttle } from './throttle';
 export { default as isMobileDevice } from './isMobileDevice';
 export { default as isTouchCapable } from './isTouchCapable';
 export { default as createFilter } from './createFilter';

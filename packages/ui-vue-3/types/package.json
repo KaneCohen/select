@@ -1,0 +1,4 @@
+{
+  "main": "dist/cohensive-select-vue-3-types.cjs.js",
+  "module": "dist/cohensive-select-vue-3-types.esm.js"
+}

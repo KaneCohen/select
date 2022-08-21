@@ -2,26 +2,24 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "noEmit": true,
     "strict": true,
-    "jsx": "preserve",
     "esModuleInterop": true,
+    "jsx": "preserve",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "composite": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@cohensive/select-core": ["../core"],
+      "@cohensive/select-core/types": ["../core/types"],
+      "@cohensive/select-core/defaults": ["../core/defaults"]
+    }
   },
   "references": [
     {
-      "path": "./packages/core"
-    },
-    {
-      "path": "./packages/ui-vue-2"
-    },
-    {
-      "path": "./packages/ui-vue-3"
+      "path": "../core"
     }
-  ]
+  ],
 }

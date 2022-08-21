@@ -1,9 +1,9 @@
-import Vue, { CreateElement, VNode } from 'vue';
+import { h, defineComponent } from 'vue';
 import Select, { theme } from '@cohensive/select-core';
 import Props from './props';
 import Container from './Container';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Select',
 
   props: Props,
@@ -13,15 +13,20 @@ export default Vue.extend({
     if (props.tailwind) {
       props.theme = theme;
     }
+
+    const select = new Select(props as any);
+    const state = select.state;
+
     return {
-      select: new Select(props)
+      select,
+      state,
     };
   },
 
   watch: {
     $props: {
-      handler() {
-        let props: any = {...this.$props};
+      handler(setupProps) {
+        let props: any = { ...setupProps };
         if (props.tailwind) {
           props.theme = theme;
         }
@@ -34,6 +39,7 @@ export default Vue.extend({
 
   mounted() {
     const select = this.select;
+
     if (select.props.autoFocus) {
       select.focus();
     }
@@ -41,11 +47,19 @@ export default Vue.extend({
     select.startListeningComposition();
     select.startListeningToTouch();
 
+    select.on('state-updated', () => {
+      this.state = select.state;
+    });
+
     select.on('change', (newValue: any) => {
       this.$emit('update:value', [...newValue]);
     });
 
-    if (select.props.closeMenuOnScroll && document && document.addEventListener) {
+    if (
+      select.props.closeMenuOnScroll &&
+      document &&
+      document.addEventListener
+    ) {
       // Listen to all scroll events, and filter them out inside of 'onScroll'
       document.addEventListener('scroll', select.onScroll, true);
     }
@@ -60,18 +74,13 @@ export default Vue.extend({
     this.select.stopListeningToTouch();
   },
 
-  render(h: CreateElement): VNode {
-    return h(
-      'div',
-      [
-        h(Container, {
-          props: {
-            select: this.select,
-            state: this.select.state,
-            slots: this.$scopedSlots
-          }
-        })
-      ]
-    );
-  }
+  render() {
+    return h('div', [
+      h(Container, {
+        select: this.select as Select,
+        state: this.state,
+        slots: this.$slots,
+      }),
+    ]);
+  },
 });

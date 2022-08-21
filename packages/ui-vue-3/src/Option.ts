@@ -1,7 +1,8 @@
-import { SelectOption } from '@cohensive/select-core/types';
-import Vue, { CreateElement, PropType, VNode } from 'vue';
+import { h, defineComponent, VNode, PropType } from 'vue';
+import { SelectOption } from "@cohensive/select-core/types";
+import Select from "@cohensive/select-core";
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Option',
 
   props: {
@@ -53,11 +54,11 @@ export default Vue.extend({
 
   updated() {
     if (this.$props.focused) {
-      this.$props.select.setFocusedOptionRef(this.$el);
+      this.$props.setFocusedOptionRef(this.$el);
     }
   },
 
-  render(h: CreateElement): VNode {
+  render(): VNode {
     const {
       getClass,
       getThemeClass,
@@ -97,11 +98,9 @@ export default Vue.extend({
       'div',
       {
         class: [...classes].filter((v: string) => v.length),
-        attrs: {
-          id,
-          tabIndex: -1,
-        },
-        on: events,
+        id,
+        tabIndex: -1,
+        ...events,
       },
       [child]
     );

@@ -1,7 +1,7 @@
 {
-  "name": "@cohensive/select-vue-2",
+  "name": "@cohensive/select-vue-3",
   "version": "0.10.0",
-  "description": "Select input UI for Vue 2",
+  "description": "Select input UI for Vue 3",
   "keywords": [
     "select",
     "combobox",
@@ -12,7 +12,7 @@
     "autocomplete",
     "input",
     "ui",
-    "vue-2",
+    "vue-3",
     "component"
   ],
   "author": {
@@ -23,9 +23,9 @@
     "type": "git",
     "url": "https://github.com/KaneCohen/tokenfield-ui-vue.git"
   },
-  "main": "dist/cohensive-select-vue-2.cjs.js",
-  "module": "dist/cohensive-select-vue-2.esm.js",
-  "types": "dist/cohensive-select-vue-2.cjs.d.ts",
+  "main": "dist/cohensive-select-vue-3.cjs.js",
+  "module": "dist/cohensive-select-vue-3.esm.js",
+  "types": "dist/cohensive-select-vue-3.cjs.d.ts",
   "license": "BSD-3-Clause",
   "preconstruct": {
     "entrypoints": [
@@ -36,7 +36,7 @@
   "dependencies": {
     "@cohensive/select-core": "^0.10.0",
     "@emotion/css": "^11.9.0",
-    "vue": "^2.6.12"
+    "vue": "^3.2"
   },
   "scripts": {
   }

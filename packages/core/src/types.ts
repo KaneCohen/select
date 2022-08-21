@@ -77,7 +77,7 @@ export type CoercedMenuPlacement = 'bottom' | 'top';
 export type MenuPosition = 'absolute' | 'fixed';
 
 export interface MenuState {
-  placement: CoercedMenuPlacement | null;
+  placement: CoercedMenuPlacement;
   shouldScroll: boolean;
   maxHeight: number;
 }
@@ -93,17 +93,17 @@ export interface FormatOptionLabelMeta {
 export interface Accessors<Option> {
   getOptionValue: GetOptionValue<Option>;
   getOptionLabel: GetOptionLabel<Option>;
-};
+}
 
 export interface Spacing {
   baseUnit: number;
   controlHeight: number;
   menuGutter: number;
-};
+}
 
 export interface Theme {
   [name: string]: string | ((props?: any) => string);
-};
+}
 
 export type SelectConfigs = {
   /**
@@ -201,7 +201,7 @@ export type SelectConfigs = {
    * String or array of strings that act as an action to select value.
    * Select must have `multiple` prop be enabled.
    */
-  delimiters?: string[],
+  delimiters?: string[];
 
   /**
    * Is the select disabled.
@@ -223,18 +223,15 @@ export type SelectConfigs = {
    * If set - formats group labels in the menu and returns UI
    * component to be used by UI library.
    */
-  formatGroupLabel?: ((
-      group: Group,
-    ) => any) | null;
+  formatGroupLabel?: ((group: Group) => any) | null;
 
   /**
    * If set - formats option labels in the menu and control and returns UI
    * component to be used by UI library.
    */
-  formatOptionLabel?: ((
-      option: Option,
-      formatOptionLabelMeta: FormatOptionLabelMeta
-    ) => any) | null;
+  formatOptionLabel?:
+    | ((option: Option, formatOptionLabelMeta: FormatOptionLabelMeta) => any)
+    | null;
 
   /**
    * Is the select focused.
@@ -553,21 +550,21 @@ type AsyncOptions = {
   /**
    * Sets parameter used by the remote API to filter and return options.
    */
-  queryParam: string,
+  queryParam: string;
 
   /**
    * Sets additional parameters to be sent to remote API.
    */
   params: {
     [name: string]: any;
-  },
+  };
 
   /**
    * Object containing options used by default async implementaion (fetch API).
    */
   requestOptions: {
     [name: string]: any;
-  }
+  };
 };
 
 export type AsyncConfigs = {
@@ -600,7 +597,7 @@ export type AsyncConfigs = {
     props: Props,
     abortController: AbortController,
     callback?: (options: Readonly<OptionsOrGroups>) => void
-  ) => void | Promise<Readonly<OptionsOrGroups>>,
+  ) => void | Promise<Readonly<OptionsOrGroups>>;
 
   /**
    * If set, will show loading indicator and message in menu if open.
@@ -635,7 +632,10 @@ export type FilterOptionOption = {
   data: Option;
 };
 
-export type FilterOption = (option: FilterOptionOption, input: string) => boolean;
+export type FilterOption = (
+  option: FilterOptionOption,
+  input: string
+) => boolean;
 
 export type GetGroupLabel = (group: Group) => string;
 
@@ -647,7 +647,10 @@ export type IsOptionDisabled = (option: Option, value: Value) => boolean;
 
 export type IsOptionSelected = (option: Option, value: Value) => boolean;
 
-export type LoadingMessage = ((inputValue: string) => string | null) | string | null;
+export type LoadingMessage =
+  | ((inputValue: string) => string | null)
+  | string
+  | null;
 
 export type ComponentClassMixin = {
   methods: Object;
@@ -664,7 +667,7 @@ export type Action =
   | 'create-option';
 
 export type ActionMeta = {
-  action: Action,
+  action: Action;
   option?: Option | undefined;
   removedValue?: Options;
   name?: string;
@@ -705,7 +708,7 @@ export type CommonProps = {
   getFocusedValue: () => Value;
   getFocusedOption: () => Option | null;
   getElementId: (element: 'group' | 'input' | 'list' | 'option') => string;
-  getThemeClass: (name: string, props: {[name: string]: any}) => string;
+  getThemeClass: (name: string, props?: { [name: string]: any }) => string;
   getClass: (name: string) => string;
   getState: () => State;
   hasValue: boolean;
@@ -714,5 +717,9 @@ export type CommonProps = {
   options: Options;
   selectOption: (option: Option) => void;
   selectProps: Props;
-  setValue: (value: ChangeValue, action: SetValueAction, option: Option) => void;
+  setValue: (
+    value: ChangeValue,
+    action: SetValueAction,
+    option: Option
+  ) => void;
 };

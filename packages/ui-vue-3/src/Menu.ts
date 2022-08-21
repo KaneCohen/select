@@ -1,15 +1,29 @@
-import Vue, { CreateElement, VNode } from 'vue';
-import { SelectGroup, SelectOption, SelectOptionOrGroup } from "@cohensive/select-core/types";
+import { h, defineComponent, VNode, PropType } from 'vue';
+import Select from "@cohensive/select-core";
+import { SelectGroup, SelectOption, SelectOptionOrGroup, State } from "@cohensive/select-core/types";
 import Group from './Group';
 import Option from './Option';
-import { commonProps } from './props';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Menu',
 
   props: {
-    ...commonProps,
-    options: Array
+    select: {
+      type: Object as PropType<Select>,
+      required: true
+    },
+    state: {
+      type: Object as PropType<State>,
+      required: true
+    },
+    slots: {
+      type: Object,
+      required: true
+    },
+    options: {
+      type: Array as PropType<SelectOptionOrGroup[]>,
+      required: true
+    }
   },
 
   mounted() {
@@ -31,8 +45,8 @@ export default Vue.extend({
     }
   },
 
-  render(h: CreateElement): VNode {
-    const { select, options, slots } = this.$props;
+  render(): VNode {
+    const { select, slots, options } = this.$props;
     const value = select.getValue();
     const focusedOption = select.getFocusedOption();
     const children: VNode[] = [];
@@ -45,18 +59,16 @@ export default Vue.extend({
       const focused = focusedOption ? focusedOption.value === option.value : false;
       const selected = value.indexOf(option.data) >= 0;
       return h(Option, {
-        props: {
-          ...select.getCommonProps(),
-          onOptionHover: () => select.onOptionHover(option.data),
-          selectOption: () => select.selectOption(option.data),
-          formatOptionLabel: () => select.formatOptionLabel(option.data, 'menu'),
-          setFocusedOptionRef: (el: HTMLDivElement) => select.setFocusedOptionRef(el),
-          slots,
-          option,
-          selected,
-          focused,
-          id: `${select.getElementId('option')}-${index}`
-        }
+        ...select.getCommonProps(),
+        onOptionHover: () => select.onOptionHover(option.data),
+        selectOption: () => select.selectOption(option.data),
+        formatOptionLabel: () => select.formatOptionLabel(option.data, 'menu'),
+        setFocusedOptionRef: (el: HTMLDivElement) => select.setFocusedOptionRef(el),
+        slots,
+        option,
+        selected,
+        focused,
+        id: `${select.getElementId('option')}-${index}`
       });
     };
 
@@ -68,14 +80,12 @@ export default Vue.extend({
       return h(
         Group,
         {
-          props: {
-            slots,
-            ...select.getCommonProps(),
-            formatGroupLabel: () => select.formatGroupLabel(group.data),
-            id: `${select.getElementId('group')}-${group.index}`,
-            group,
-            children: options,
-          }
+          slots,
+          ...select.getCommonProps(),
+          formatGroupLabel: () => select.formatGroupLabel(group.data),
+          id: `${select.getElementId('group')}-${group.index}`,
+          group,
+          children: options,
         },
       );
     }
@@ -87,9 +97,6 @@ export default Vue.extend({
         children.push(renderOption(item, `${item.index}`));
       }
     });
-
-
-
 
     if (!children.length) {
       children.push(h(
@@ -105,14 +112,12 @@ export default Vue.extend({
       'div',
       {
         class: [...classes].filter((v: string) => v.length),
-        on: {
-          mousedown(e: MouseEvent) {
-            select.onMenuMouseDown(e);
-          },
-          mousemove(e: MouseEvent) {
-            select.onMenuMouseMove(e);
-          },
-        }
+        onMousedown(e: MouseEvent) {
+          select.onMenuMouseDown(e);
+        },
+        onMousemove(e: MouseEvent) {
+          select.onMenuMouseMove(e);
+        },
       },
       children
     );

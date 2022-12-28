@@ -1016,11 +1016,11 @@ class Select extends EventEmitter {
   };
 
   getValue = (): Value => {
-    return this._state.value;
+    return this.state.value;
   };
 
   getFocusedValue = (): Value => {
-    return this.props.multiple ? this._state.focusedValue : this._state.value;
+    return this.props.multiple ? this.state.focusedValue : this.state.value;
   };
 
   removeValue(removedValue: Option | Options): Select {

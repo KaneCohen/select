@@ -10,7 +10,7 @@ export default function Value(props: ValueProps): VNode {
   const isFocused = select.getFocusedValue().indexOf(option) >= 0;
 
   let classes = [
-    select.getThemeClass(themeClassName, {value: option}),
+    select.getThemeClass(themeClassName, {value: option, focused: isFocused}),
     select.getClass(className),
   ];
 

@@ -7,6 +7,7 @@ interface ControlProps extends CommonProps {
 
 interface MultipleValueProps extends CommonProps {
   value: Value;
+  focused: boolean;
 }
 
 interface ClearIndicatorProps extends CommonProps {
@@ -42,13 +43,12 @@ export const theme = {
   placeholder: 'row-start-1 col-start-1 row-end-2 col-end-3',
   value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full whitespace-pre text-ellipsis overflow-hidden',
   multipleValue: (props: MultipleValueProps) => {
-    const isFocused = props.getFocusedValue().indexOf(props.value) >= 0;
-    return `flex items-stretch content-center m-0.5 first:ml-0 rounded box-border bg-gray-300 ${isFocused ? 'ring-1 ring-gray-500 ring-inset' : ''}`;
+    return `flex items-stretch content-center m-0.5 first:ml-0 rounded box-border bg-gray-300 ${props.focused ? 'ring-1 ring-gray-500 ring-inset' : ''}`;
   },
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
   multipleValueRemove: 'flex items-center px-1 rounded box-border opacity-50 hover:opacity-100',
   inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3',
-  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-0 border-0 ring-0 bg-transparent',
+  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-0 border-0 ring-0 bg-transparent focus:outline-0 focus:ring-0',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',
   indicators: 'flex items-center',
   loadingIndicator: 'flex gap-1 p-2',

@@ -209,6 +209,11 @@ export const selectProps = {
     default: defaults.menuShouldScrollIntoView
   },
 
+  modelValue: {
+    type: [Object, Array],
+    default: () => defaults.value
+  },
+
   name: {
     type: String,
     default: defaults.name

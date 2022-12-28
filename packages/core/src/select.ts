@@ -181,6 +181,7 @@ function buildSelectOptions(
             }
           : undefined;
       }
+
       const selectOption = toSelectOption(props, item, value, index);
 
       return isFocusable(props, state, selectOption)

@@ -8,11 +8,15 @@ export default defineComponent({
 
   props: Props,
 
+  emits: ['update:modelValue'],
+
   data() {
     let props: any = {...this.$props};
     if (props.tailwind) {
       props.theme = theme;
     }
+
+    props.value = props.modelValue;
 
     const select = new Select(props as any);
     const state = select.state;
@@ -30,6 +34,7 @@ export default defineComponent({
         if (props.tailwind) {
           props.theme = theme;
         }
+        props.value = props.modelValue;
         this.select.setProps(props);
       },
       deep: true,
@@ -52,7 +57,7 @@ export default defineComponent({
     });
 
     select.on('change', (newValue: any) => {
-      this.$emit('update:value', [...newValue]);
+      this.$emit('update:modelValue', [...newValue]);
     });
 
     if (

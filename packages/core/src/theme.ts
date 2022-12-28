@@ -48,7 +48,7 @@ export const theme = {
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
   multipleValueRemove: 'flex items-center px-1 rounded box-border opacity-50 hover:opacity-100',
   inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3',
-  input: 'w-full row-start-1 col-start-2 row-end-auto col-end-auto outline-none border-0 bg-transparent',
+  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-none border-0 ring-0 bg-transparent',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',
   indicators: 'flex items-center',
   loadingIndicator: 'flex gap-1 p-2',
@@ -71,6 +71,6 @@ export const theme = {
     return `px-2 py-1 pb-0.5 text-xs uppercase text-gray-400`;
   },
   option: (props: OptionProps) => {
-    return `px-2 py-1 ${!props.selected && props.focused ? 'bg-gray-100' : ''} ${props.selected ? 'bg-blue-100' : ''} ${props.option.disabled ? 'text-gray-300' : ''}`;
+    return `px-2 py-1 border-0 ${!props.selected && props.focused ? 'bg-gray-100' : ''} ${props.selected ? 'bg-blue-100' : ''} ${props.option.disabled ? 'text-gray-300' : ''}`;
   },
 };

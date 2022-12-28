@@ -1,9 +1,10 @@
 import { h, defineComponent, VNode, PropType } from 'vue';
 import { SelectOption } from "@cohensive/select-core/types";
-import Select from "@cohensive/select-core";
 
 export default defineComponent({
   name: 'Option',
+
+  inheritAttrs: false,
 
   props: {
     getClass: {

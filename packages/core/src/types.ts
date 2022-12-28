@@ -706,6 +706,7 @@ export type CommonProps = {
   clearValue: () => void;
   getValue: () => Value;
   getFocusedValue: () => Value;
+  getFocusedValues: () => any[];
   getFocusedOption: () => Option | null;
   getElementId: (element: 'group' | 'input' | 'list' | 'option') => string;
   getThemeClass: (name: string, props?: { [name: string]: any }) => string;

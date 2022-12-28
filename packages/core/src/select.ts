@@ -1023,6 +1023,10 @@ class Select extends EventEmitter {
     return this.props.multiple ? this.state.focusedValue : this.state.value;
   };
 
+  getFocusedValues = (): any[] => {
+    return this.props.multiple ? this.state.focusedValue.map(v => v.value) : this.state.value.map(v => v.value);
+  };
+
   removeValue(removedValue: Option | Options): Select {
     this.onInputChange('', { action: 'input-change' });
 
@@ -1373,6 +1377,7 @@ class Select extends EventEmitter {
       clearValue,
       getValue,
       getFocusedValue,
+      getFocusedValues,
       getFocusedOption,
       getElementId,
       getThemeClass,
@@ -1390,6 +1395,7 @@ class Select extends EventEmitter {
       clearValue,
       getValue,
       getFocusedValue,
+      getFocusedValues,
       getFocusedOption,
       getElementId,
       getThemeClass,

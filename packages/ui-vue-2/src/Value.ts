@@ -12,10 +12,10 @@ export default {
     const { multiple } = select.props;
     const themeClassName = multiple ? 'multipleValue' : 'value';
     const className = multiple ? 'multiple-value' : 'value';
-    const isFocused = select.getFocusedValue().indexOf(option) >= 0;
+    const isFocused = select.getFocusedValues().indexOf(option.value) >= 0;
 
     let classes = [
-      select.getThemeClass(themeClassName, {value: option}),
+      select.getThemeClass(themeClassName, {value: option, focused: isFocused}),
       select.getClass(className),
     ];
 

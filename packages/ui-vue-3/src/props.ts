@@ -440,6 +440,9 @@ export const selectCommonProps = {
   getFocusedValue: {
     type: Function
   },
+  getFocusedValues: {
+    type: Function
+  },
   getFocusedOption: {
     type: Function
   },

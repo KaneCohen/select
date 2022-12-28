@@ -1,6 +1,6 @@
 {
   "name": "@cohensive/select-vue-3",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "Select input UI for Vue 3",
   "keywords": [
     "select",
@@ -34,7 +34,7 @@
     ]
   },
   "dependencies": {
-    "@cohensive/select-core": "^0.10",
+    "@cohensive/select-core": "^0.10.3",
     "@emotion/css": "^11.9.0",
     "vue": "^3.2"
   },

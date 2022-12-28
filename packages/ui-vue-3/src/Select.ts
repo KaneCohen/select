@@ -12,7 +12,7 @@ export default defineComponent({
 
   data() {
     let props: any = {...this.$props};
-    if (props.tailwind) {
+    if (props.tailwind && !props.theme) {
       props.theme = theme;
     }
 
@@ -31,7 +31,7 @@ export default defineComponent({
     $props: {
       handler(setupProps) {
         let props: any = { ...setupProps };
-        if (props.tailwind) {
+        if (props.tailwind && !props.theme) {
           props.theme = theme;
         }
         props.value = props.modelValue;

@@ -35,7 +35,7 @@ interface OptionProps extends CommonProps {
 export const theme = {
   container: 'relative',
   control: (props: ControlProps) => {
-    return `flex flex-wrap items-center justify-between outline-none border border-solid border-gray-300 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 ring-opacity-50' : ''}`;
+    return `flex flex-wrap items-center justify-between outline-0 border border-solid border-gray-300 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 ring-opacity-50' : ''}`;
   },
   valueContainer: 'grid flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
   multipleValueContainer: 'flex flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
@@ -48,7 +48,7 @@ export const theme = {
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
   multipleValueRemove: 'flex items-center px-1 rounded box-border opacity-50 hover:opacity-100',
   inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3',
-  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-none border-0 ring-0 bg-transparent',
+  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-0 border-0 ring-0 bg-transparent',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',
   indicators: 'flex items-center',
   loadingIndicator: 'flex gap-1 p-2',

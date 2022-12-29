@@ -61,17 +61,12 @@ export default Vue.extend({
   },
 
   render(h: CreateElement): VNode {
-    return h(
-      'div',
-      [
-        h(Container, {
-          props: {
-            select: this.select,
-            state: this.select.state,
-            slots: this.$scopedSlots
-          }
-        })
-      ]
-    );
+    return h(Container, {
+      props: {
+        select: this.select,
+        state: this.select.state,
+        slots: this.$scopedSlots
+      }
+    });
   }
 });

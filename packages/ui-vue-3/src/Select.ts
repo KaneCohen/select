@@ -80,12 +80,10 @@ export default defineComponent({
   },
 
   render() {
-    return h('div', [
-      h(Container, {
-        select: this.select as Select,
-        state: this.state,
-        slots: this.$slots,
-      }),
-    ]);
+    return h(Container, {
+      select: this.select as Select,
+      state: this.state,
+      slots: this.$slots,
+    });
   },
 });

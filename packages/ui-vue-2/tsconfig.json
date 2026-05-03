@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "es2018",
+    "lib": ["es2018", "dom"],
+    "module": "esnext",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist/declarations",
+    "outDir": "dist/declarations",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "types": ["node"],
     "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
@@ -22,4 +30,12 @@
       "path": "../core"
     }
   ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "vue.d.ts"
+  ]
 }

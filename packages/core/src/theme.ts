@@ -36,29 +36,29 @@ interface OptionProps extends CommonProps {
 export const theme = {
   container: 'relative',
   control: (props: ControlProps) => {
-    return `flex flex-wrap items-center justify-between outline-0 border border-solid border-gray-300 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 ring-opacity-50' : ''}`;
+    return `flex flex-wrap items-center justify-between outline-none border border-solid border-gray-300 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 ring-opacity-50' : ''}`;
   },
   valueContainer: 'grid flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
   multipleValueContainer: 'flex flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
   placeholder: 'row-start-1 col-start-1 row-end-2 col-end-3',
-  value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full whitespace-pre text-ellipsis overflow-hidden',
+  value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full mx-0.5 whitespace-pre text-ellipsis overflow-hidden',
   multipleValue: (props: MultipleValueProps) => {
-    return `flex items-stretch content-center m-0.5 overflow-hidden rounded box-border bg-gray-300 ${props.focused ? 'ring-1 ring-gray-500 ring-inset' : ''}`;
+    return `flex items-stretch content-center m-0.5 first:ml-0 overflow-hidden rounded box-border bg-gray-300 ${props.focused ? 'ring-1 ring-offset-0 ring-offset-black ring-gray-500 ring-inset' : ''}`;
   },
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
-  multipleValueRemove: 'flex items-center px-1 rounded box-border opacity-50 hover:opacity-100',
-  inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3 pl-1',
-  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-0 border-0 ring-0 bg-transparent focus:outline-0 focus:ring-0',
+  multipleValueRemove: 'flex items-center px-1 rounded box-border border-0 bg-transparent opacity-50 hover:opacity-100',
+  inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3 h-full mx-0.5',
+  input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-none outline-0 border-0 ring-0 bg-transparent focus:outline-0 focus:ring-0',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',
   indicators: 'flex items-center',
-  loadingIndicator: 'flex gap-1 p-2',
+  loadingIndicator: 'flex items-center gap-1 p-2',
   loadingIndicatorDot: 'w-1.5 h-1.5 rounded-lg bg-gray-400',
   clearIndicator: (props: ClearIndicatorProps) => {
-    return `p-2 transition-opacity ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'}`;
+    return `flex items-center p-2 transition-opacity ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'} focus-visible:opacity-50`;
   },
   indicatorSeparator: 'self-stretch w-px my-2 bg-gray-300',
   dropdownIndicator: (props: DropdownIndicatorProps) => {
-    return `p-2 transition-opacity ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'}`;
+    return `flex items-center p-2 transition-opacity ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'} focus-visible:opacity-50`;
   },
   menu: (props: MenuProps) => {
     return `absolute z-10 w-full my-2 py-1 overflow-auto border border-solid border-gray-300 bg-white rounded-md shadow-lg ${props.placement === 'top' ? 'bottom-full' : 'top-full'}`;

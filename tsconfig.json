@@ -1,18 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "es2018",
+    "lib": ["es2018", "dom"],
+    "module": "esnext",
     "noEmit": true,
+    "types": ["node"],
     "strict": true,
     "jsx": "preserve",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "composite": true,
+    "composite": true
   },
+  "exclude": [
+    "**/dist",
+    "**/node_modules"
+  ],
+  "files": [],
+  "include": [],
   "references": [
     {
       "path": "./packages/core"

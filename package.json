@@ -1,6 +1,6 @@
 {
   "name": "@cohensive/select",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Select",
   "private": true,
   "keywords": [
@@ -23,16 +23,15 @@
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@babel/core": "^7.18.6",
-    "@babel/preset-env": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
-    "@changesets/cli": "^2.23.2",
-    "@preconstruct/cli": "^2.2",
-    "autoprefixer": "^10.4",
-    "postcss": "^8.4",
-    "postcss-cli": "^10.0",
-    "tailwindcss": "^3.0",
-    "typescript": "^4.2.3"
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.3",
+    "@babel/preset-typescript": "^7.28.5",
+    "@changesets/cli": "^2.31.0",
+    "@preconstruct/cli": "^2.8.12",
+    "@types/node": "^24.10.1",
+    "autoprefixer": "^10.5.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^6.0.3"
   },
   "workspaces": [
     "packages/*"
@@ -44,12 +43,13 @@
   },
   "browser": {},
   "scripts": {
-    "dev": "preconstruct dev",
-    "watch": "preconstruct watch",
+    "dev": "preconstruct dev && npm run theme",
+    "watch": "sh -c 'npm run theme && npm run theme:watch & preconstruct watch'",
     "build": "preconstruct build",
-    "theme": "postcss ./packages/core/src/theme.css -o ./packages/core/dist/select.css",
+    "theme": "sh -c 'tailwindcss -i ./packages/core/src/theme.css > ./packages/core/dist/select.css'",
+    "theme:watch": "tailwindcss -i ./packages/core/src/theme.css -o ./packages/core/dist/select.css --watch",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "yarn build && yarn theme && changeset publish"
+    "release": "npm run build && npm run theme && changeset publish"
   }
 }

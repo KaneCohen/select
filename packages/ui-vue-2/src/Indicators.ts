@@ -14,7 +14,6 @@ export function renderCross(h: CreateElement, size: number): VNode {
       width: size,
       viewBox: `0 0 20 20`,
       ariaHidden: 'true',
-      focusable: false,
     }
   }, [
     h('path', {
@@ -44,7 +43,6 @@ function renderDropdown(h: CreateElement, size: number) {
       width: size,
       viewBox: '0 0 20 20',
       ariaHidden: 'true',
-      focusable: false,
     }
   }, [
     h('path', {
@@ -109,6 +107,10 @@ function renderClearIndicator(h: CreateElement, props: CommonProps): VNode {
     'div',
     {
       class: [...classes].filter((v: string) => v.length),
+      attrs: {
+        focusable: true,
+        tabindex: 0,
+      },
       on: {
         mousedown(e: MouseEvent) {
           select.onClearIndicatorMouseDown(e);
@@ -156,6 +158,10 @@ function renderDropdownIndicator(h: CreateElement, props: CommonProps): VNode {
     'div',
     {
       class: [...classes].filter((v: string) => v.length),
+      attrs: {
+        focusable: true,
+        tabindex: 0,
+      },
       on: {
         mousedown(e: MouseEvent) {
           select.onDropdownIndicatorMouseDown(e);

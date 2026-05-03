@@ -824,7 +824,7 @@ class Select extends EventEmitter {
 
     const el = event.currentTarget as HTMLInputElement;
     const action = keyMap[event.code] || event.code;
-
+    const isImeEvent = event.isComposing || event.key === 'Process';
 
     switch (action) {
       case 'Escape':
@@ -905,13 +905,16 @@ class Select extends EventEmitter {
         }
         break;
       case 'Select':
-        if ((!multiple && !isOpen) || event.keyCode === 229) {
+        if ((!multiple && !isOpen) || isImeEvent) {
           // Ignore keydown event from Input Method Editor (IME)
           return;
         }
         if (this.isComposing) return;
         if (focusedOption) {
           this.selectOption(focusedOption);
+        } else {
+          // Allow tabbing out of the control when the menu is closed
+          return;
         }
         break;
       case 'SelectAll':
@@ -941,7 +944,7 @@ class Select extends EventEmitter {
         }
 
         if (multiple && delimiters.includes(event.key)) {
-          if ((!multiple && !isOpen) || event.keyCode === 229) {
+          if ((!multiple && !isOpen) || isImeEvent) {
             // Ignore keydown event from Input Method Editor (IME)
             return;
           }

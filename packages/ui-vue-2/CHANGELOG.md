@@ -1,5 +1,13 @@
 # @cohensive/select-vue-2
 
+## 0.11.1
+
+### Patch Changes
+
+- Add Readme
+- Updated dependencies
+  - @cohensive/select-core@0.11.1
+
 ## 0.11.0
 
 ### Minor Changes

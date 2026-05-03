@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.11.1
+
+### Patch Changes
+
+- Add Readme
+
 ## 0.11.0
 
 ### Minor Changes

@@ -34,10 +34,9 @@
     ]
   },
   "dependencies": {
-    "@cohensive/select-core": "^0.10.6",
+    "@cohensive/select-core": "^0.11.0",
     "@emotion/css": "^11.13.5",
     "vue": "^2.7.16"
   },
-  "scripts": {
-  }
+  "scripts": {}
 }

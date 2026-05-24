@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.13.0
+
+### Minor Changes
+
+- Fix open menu focus handling on keyboard events.
+
 ## 0.12.0
 
 ### Minor Changes

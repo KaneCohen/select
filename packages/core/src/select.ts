@@ -342,6 +342,7 @@ class Select extends EventEmitter {
         this.abortController.abort();
 
         if (!inputValue) {
+          this.setState({isLoading: false});
           return;
         }
 
@@ -762,9 +763,9 @@ class Select extends EventEmitter {
 
     if (!options.length) return;
     let nextFocus = 0; // handles 'first'
-    let focusedIndex = options.indexOf(focusedOption!);
-    if (!focusedOption) {
-      focusedIndex = -1;
+    let focusedIndex = -1;
+    if (focusedOption) {
+      focusedIndex = options.map((option) => option.value).indexOf(focusedOption.value);
     }
 
     if (direction === 'up') {
@@ -780,6 +781,7 @@ class Select extends EventEmitter {
     } else if (direction === 'last') {
       nextFocus = options.length - 1;
     }
+
     this.scrollToFocusedOptionOnUpdate = true;
     this.setState({
       focusedValue: [],

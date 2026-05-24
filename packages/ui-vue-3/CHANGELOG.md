@@ -1,5 +1,16 @@
 # @cohensive/select-vue-3
 
+## 0.13.0
+
+### Minor Changes
+
+- Fix open menu focus handling on keyboard events.
+
+### Patch Changes
+
+- Updated dependencies
+  - @cohensive/select-core@0.13.0
+
 ## 0.12.0
 
 ### Minor Changes

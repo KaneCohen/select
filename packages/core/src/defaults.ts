@@ -72,7 +72,7 @@ export const selectConfigs: SelectConfigs = {
   menuPlacement: 'auto',
   menuPosition: 'absolute',
   menuShouldBlockScroll: false,
-  menuShouldScrollIntoView: !isMobileDevice(),
+  menuShouldScrollIntoView: isMobileDevice(),
   minInputLength: 0,
   minMenuHeight: 140,
   multiple: false,

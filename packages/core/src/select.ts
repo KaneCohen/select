@@ -24,7 +24,7 @@ import {
   CoercedMenuPlacement
 } from './types';
 import { debounce, cleanValue, isDocumentElement, notNullish, scrollIntoView } from './utils';
-import { getPenuPlacement, scrollToMenu } from './utils/menuPlacement';
+import { getMenuPlacement, scrollToMenu } from './utils/menuPlacement';
 
 let instanceId = 0;
 
@@ -293,31 +293,36 @@ class Select extends EventEmitter {
   };
 
   setProps(props: SelectConfigs): Select {
-    this.props = { ...defaults, ...props } as Props;
+    const hasProp = (key: keyof SelectConfigs): boolean =>
+      Object.prototype.hasOwnProperty.call(props, key);
 
-    const value = cleanValue(this.props.value);
+    this.props = { ...defaults, ...this.props, ...props } as Props;
 
-    this.setState({
-      ...this._state,
-      ...{
-        options:
-          this.props.options === undefined
-            ? this._state.options
-            : this.props.options,
-        isOpen:
-          this.props.open === undefined ? this._state.isOpen : this.props.open,
-        isFocused:
-          this.props.focused === undefined
-            ? this._state.isFocused
-            : this.props.focused,
-        isLoading:
-          this.props.loading === undefined
-            ? this._state.isLoading
-            : this.props.loading,
-        inputValue: this.props.inputValue || '',
-        value: value.slice(0, this.props.maxValues),
-      },
-    });
+    const stateProps: Partial<State> = {};
+
+    if (hasProp('options') && this.props.options !== undefined) {
+      stateProps.options = this.props.options;
+    }
+    if (hasProp('open') && this.props.open !== undefined) {
+      stateProps.isOpen = this.props.open;
+    }
+    if (hasProp('focused') && this.props.focused !== undefined) {
+      stateProps.isFocused = this.props.focused;
+    }
+    if (hasProp('loading') && this.props.loading !== undefined) {
+      stateProps.isLoading = this.props.loading;
+    }
+    if (hasProp('inputValue')) {
+      stateProps.inputValue = this.props.inputValue || '';
+    }
+    if (hasProp('value') || hasProp('maxValues')) {
+      const value = hasProp('value') ? cleanValue(this.props.value) : this._state.value;
+      stateProps.value = value.slice(0, this.props.maxValues);
+    }
+
+    if (Object.keys(stateProps).length) {
+      this.setState(stateProps);
+    }
 
     return this;
   }
@@ -336,11 +341,17 @@ class Select extends EventEmitter {
 
         this.abortController.abort();
 
-        const promise = loadOptions(inputValue, this.props, this.abortController, (options) => {
+        if (!inputValue) {
+          return;
+        }
+
+        const callback = (options: Readonly<OptionsOrGroups>): void => {
           this.setAsyncCache(inputValue, [...options]);
           this.setState({options: [...options], isLoading: false});
           this.focusOption();
-        });
+        };
+
+        const promise = loadOptions(inputValue, this.props, this.abortController, callback);
 
         if (promise) {
           promise.then((options) => {
@@ -629,6 +640,7 @@ class Select extends EventEmitter {
 
     this.setState({
       isOpen: this.props.open !== undefined ? this.props.open : false,
+      options: this.props.options,
     });
 
     this.emit('menu-close');
@@ -1484,7 +1496,7 @@ class Select extends EventEmitter {
 
   getMenuPlacement = (menuEl: HTMLDivElement | null): MenuState => {
     const { props } = this;
-    return getPenuPlacement({
+    return getMenuPlacement({
       maxHeight: props.maxMenuHeight,
       menuEl: menuEl,
       minHeight: props.minMenuHeight,
@@ -1497,13 +1509,11 @@ class Select extends EventEmitter {
 
   scrollToMenu = (menuEl: HTMLDivElement, placement: CoercedMenuPlacement): void => {
     const { props } = this;
-    if (props.menuShouldScrollIntoView) {
-      scrollToMenu({
-        menuEl: menuEl,
-        placement: placement,
-        isFixedPosition: props.menuPosition === 'fixed'
-      });
-    }
+    scrollToMenu({
+      menuEl: menuEl,
+      placement: placement,
+      isFixedPosition: props.menuPosition === 'fixed'
+    });
   }
 
   /**

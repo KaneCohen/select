@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue';
+import { h, defineComponent, ref, onMounted } from 'vue';
 import Indicators from './Indicators';
 import { CommonProps } from './types';
 import ValueContainer from './ValueContainer';
@@ -21,40 +21,39 @@ export default defineComponent({
     }
   },
 
-  mounted() {
-    this.select.setControlRef(this.$el);
-  },
+  setup(props: CommonProps) {
+    const controlRef = ref<HTMLDivElement | null>(null);
 
-  render() {
-    const select = this.select;
-    const state = this.state;
-    const props = this.$props;
+    onMounted(() => {
+      if (controlRef.value) {
+        props.select.setControlRef(controlRef.value);
+      }
+    });
 
-    let classes = [
-      select.getThemeClass('control', {focused: state.isFocused, open: state.isOpen}),
-      select.getClass('control'),
-    ];
+    return () => {
+      const { select, state } = props;
 
-    if (state.isFocused) {
-      classes.push(select.getClass('control--is-focused'));
-    }
+      const classes = [
+        select.getThemeClass('control', { focused: state.isFocused, open: state.isOpen }),
+        select.getClass('control'),
+        state.isFocused ? select.getClass('control--is-focused') : '',
+        state.isOpen ? select.getClass('control--menu-is-open') : '',
+      ];
 
-    if (state.isOpen) {
-      classes.push(select.getClass('control--menu-is-open'));
-    }
-
-    return h(
-      'div',
-      {
-        class: [...classes].filter((v: string) => v.length),
-        onMousedown(e: MouseEvent) {
-          select.onControlMouseDown(e);
+      return h(
+        'div',
+        {
+          class: classes.filter((v: string) => v.length),
+          ref: controlRef,
+          onMousedown(e: MouseEvent) {
+            select.onControlMouseDown(e);
+          },
         },
-      },
-      [
-        h(ValueContainer, props as CommonProps),
-        h(Indicators, props as CommonProps),
-      ]
-    );
-  }
+        [
+          h(ValueContainer, props as CommonProps),
+          h(Indicators, props as CommonProps),
+        ]
+      );
+    };
+  },
 });

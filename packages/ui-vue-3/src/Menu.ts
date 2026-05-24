@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode, PropType } from 'vue';
+import { h, defineComponent, VNode, PropType, ref, onMounted } from 'vue';
 import Select from "@cohensive/select-core";
 import { SelectGroup, SelectOption, SelectOptionOrGroup, State } from "@cohensive/select-core/types";
 import Group from './Group';
@@ -26,100 +26,109 @@ export default defineComponent({
     }
   },
 
-  mounted() {
-    this.select.setMenuListRef(this.$el);
-    const placement = this.select.getMenuPlacement(this.$el);
+  setup(props) {
+    const menuRef = ref<HTMLDivElement | null>(null);
 
-    this.$el.classList.remove(...this.$el.classList);
-    this.$el.classList.add(
+    onMounted(() => {
+      if (!menuRef.value) {
+        return;
+      }
+
+      props.select.setMenuListRef(menuRef.value);
+      const placement = props.select.getMenuPlacement(menuRef.value);
+
+      menuRef.value.classList.remove(...menuRef.value.classList);
+      menuRef.value.classList.add(
       ...[
-        ...this.select.getThemeClass(`menu`, placement).split(' '),
-        this.select.getClass('menu'),
-        this.select.getClass(`menu--${placement.placement}`)
+        ...props.select.getThemeClass('menu', placement).split(' '),
+        props.select.getClass('menu'),
+        props.select.getClass(`menu--${placement.placement}`)
       ].filter((v: string) => v.length),
-    );
-    (this.$el as HTMLElement).style.maxHeight = `${placement.maxHeight}px`;
-
-    if (placement.shouldScroll) {
-      this.select.scrollToMenu(this.$el, placement.placement);
-    }
-  },
-
-  render(): VNode {
-    const { select, slots, options } = this.$props;
-    const value = select.getValue();
-    const focusedOption = select.getFocusedOption();
-    const children: VNode[] = [];
-    const classes = [
-      select.getThemeClass('menu'),
-      select.getClass('menu'),
-    ];
-
-    const renderOption = (option: SelectOption, index: string) => {
-      const focused = focusedOption ? focusedOption.value === option.value : false;
-      const selected = value.indexOf(option.data) >= 0;
-      return h(Option, {
-        ...select.getCommonProps(),
-        onOptionHover: () => select.onOptionHover(option.data),
-        selectOption: () => select.selectOption(option.data),
-        formatOptionLabel: () => select.formatOptionLabel(option.data, 'menu'),
-        setFocusedOptionRef: (el: HTMLDivElement) => select.setFocusedOptionRef(el),
-        slots,
-        option,
-        selected,
-        focused,
-        id: `${select.getElementId('option')}-${index}`
-      });
-    };
-
-    const renderGroup = (group: SelectGroup) => {
-      const options: VNode[] = group.options.map((option) => {
-        return renderOption(option, `${group.index}-${option.index}`);
-      });
-
-      return h(
-        Group,
-        {
-          slots,
-          ...select.getCommonProps(),
-          formatGroupLabel: () => select.formatGroupLabel(group.data),
-          id: `${select.getElementId('group')}-${group.index}`,
-          group,
-          children: options,
-        },
       );
-    }
+      menuRef.value.style.maxHeight = `${placement.maxHeight}px`;
 
-    options.forEach((item: SelectOptionOrGroup) => {
-      if (item.type === 'group') {
-        children.push(renderGroup(item));
-      } else {
-        children.push(renderOption(item, `${item.index}`));
+      if (placement.shouldScroll) {
+        props.select.scrollToMenu(menuRef.value, placement.placement);
       }
     });
 
-    if (!children.length) {
-      children.push(h(
+    return (): VNode => {
+      const { select, slots, options } = props;
+      const value = select.getValue();
+      const focusedOption = select.getFocusedOption();
+      const children: VNode[] = [];
+      const classes = [
+        select.getThemeClass('menu'),
+        select.getClass('menu'),
+      ];
+
+      const renderOption = (option: SelectOption, index: string) => {
+        const focused = focusedOption ? focusedOption.value === option.value : false;
+        const selected = value.indexOf(option.data) >= 0;
+        return h(Option, {
+          ...select.getCommonProps(),
+          onOptionHover: () => select.onOptionHover(option.data),
+          selectOption: () => select.selectOption(option.data),
+          formatOptionLabel: () => select.formatOptionLabel(option.data, 'menu'),
+          setFocusedOptionRef: (el: HTMLDivElement) => select.setFocusedOptionRef(el),
+          slots,
+          option,
+          selected,
+          focused,
+          id: `${select.getElementId('option')}-${index}`
+        });
+      };
+
+      const renderGroup = (group: SelectGroup) => {
+        const groupOptions: VNode[] = group.options.map((option) => {
+          return renderOption(option, `${group.index}-${option.index}`);
+        });
+
+        return h(
+          Group,
+          {
+            slots,
+            ...select.getCommonProps(),
+            formatGroupLabel: () => select.formatGroupLabel(group.data),
+            id: `${select.getElementId('group')}-${group.index}`,
+            group,
+            children: groupOptions,
+          },
+        );
+      };
+
+      options.forEach((item: SelectOptionOrGroup) => {
+        if (item.type === 'group') {
+          children.push(renderGroup(item));
+        } else {
+          children.push(renderOption(item, `${item.index}`));
+        }
+      });
+
+      if (!children.length) {
+        children.push(h(
+          'div',
+          {
+            class: [select.getThemeClass('noOptionsMessage')]
+          },
+          select.props.noOptionsMessage
+        ));
+      }
+
+      return h(
         'div',
         {
-          class: [select.getThemeClass('noOptionsMessage')]
+          ref: menuRef,
+          class: classes.filter((v: string) => v.length),
+          onMousedown(e: MouseEvent) {
+            select.onMenuMouseDown(e);
+          },
+          onMousemove(e: MouseEvent) {
+            select.onMenuMouseMove(e);
+          },
         },
-        select.props.noOptionsMessage
-      ));
-    }
-
-    return h(
-      'div',
-      {
-        class: [...classes].filter((v: string) => v.length),
-        onMousedown(e: MouseEvent) {
-          select.onMenuMouseDown(e);
-        },
-        onMousemove(e: MouseEvent) {
-          select.onMenuMouseMove(e);
-        },
-      },
-      children
-    );
-  }
+        children
+      );
+    };
+  },
 });

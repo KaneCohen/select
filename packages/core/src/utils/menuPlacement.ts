@@ -146,7 +146,7 @@ export function scrollToMenu({
   }
 }
 
-export function getPenuPlacement({
+export function getMenuPlacement({
   maxHeight,
   menuEl,
   minHeight,
@@ -165,10 +165,12 @@ export function getPenuPlacement({
   // the menu is rendered
   const { height: scrollHeight } = scrollParent.getBoundingClientRect();
   const {
-    bottom: menuBottom,
-    height: menuHeight,
+    height: reactMenuHeight,
     top: menuTop,
   } = menuEl.getBoundingClientRect();
+
+  const menuHeight = Math.min(reactMenuHeight, maxHeight);
+  const menuBottom = menuTop + menuHeight;
 
   const { top: containerTop } = menuEl.offsetParent.getBoundingClientRect();
   const viewHeight = isFixedPosition

@@ -1,4 +1,4 @@
-import { h, defineComponent, VNode, PropType } from 'vue';
+import { h, defineComponent, VNode, PropType, ref, onUpdated } from 'vue';
 import { SelectOption } from "@cohensive/select-core/types";
 
 export default defineComponent({
@@ -53,57 +53,62 @@ export default defineComponent({
     }
   },
 
-  updated() {
-    if (this.$props.focused) {
-      this.$props.setFocusedOptionRef(this.$el);
-    }
+  setup(props): () => VNode {
+    const optionRef = ref<HTMLDivElement | null>(null);
+
+    onUpdated(() => {
+      if (props.focused && optionRef.value) {
+        props.setFocusedOptionRef(optionRef.value);
+      }
+    });
+
+    return () => {
+      const {
+        getClass,
+        getThemeClass,
+        onOptionHover,
+        selectOption,
+        formatOptionLabel,
+        option,
+        selected,
+        focused,
+        id
+      } = props;
+      const classes: string[] = [
+        getThemeClass('option', { option, selected, focused }),
+        getClass('option'),
+      ];
+
+      if (option.disabled) {
+        classes.push(getClass('option--is-disabled'));
+      }
+
+      if (focused) {
+        classes.push(getClass('option--is-focused'));
+      }
+
+      const events: { [name: string]: () => void } = {};
+      if (!option.disabled) {
+        events.onClick = selectOption;
+        events.onMousemove = onOptionHover;
+        events.onMouseover = onOptionHover;
+      }
+
+      const child = props.slots['option']
+        ? props.slots['option']({ props })
+        : formatOptionLabel();
+
+      return h(
+        'div',
+        {
+          ref: optionRef,
+          class: classes.filter((v: string) => v.length),
+          id,
+          tabIndex: -1,
+          ...events,
+        },
+        [child]
+      );
+    };
   },
-
-  render(): VNode {
-    const {
-      getClass,
-      getThemeClass,
-      onOptionHover,
-      selectOption,
-      formatOptionLabel,
-      option,
-      selected,
-      focused,
-      id
-    } = this.$props;
-    const classes: string[] = [
-      getThemeClass('option', {option, selected, focused}),
-      getClass('option'),
-    ];
-
-    if (option.disabled) {
-      classes.push(getClass('option--is-disabled'));
-    }
-
-    if (focused) {
-      classes.push(getClass('option--is-focused'));
-    }
-
-    const events: {[name: string]: () => void} = {};
-    if (!option.disabled) {
-      events.onClick = selectOption;
-      events.onMousemove = onOptionHover;
-      events.onMouseover = onOptionHover;
-    }
-
-    let child = this.slots['option']
-      ? this.slots['option']({props: this.$props})
-      : formatOptionLabel();
-
-    return h(
-      'div',
-      {
-        class: [...classes].filter((v: string) => v.length),
-        id,
-        tabIndex: -1,
-        ...events,
-      },
-      [child]
-    );
-  }
 });

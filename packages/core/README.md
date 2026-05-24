@@ -103,7 +103,7 @@ select.on('change', (value, actionMeta) => {
 | `menuPlacement` | `'auto' \| 'bottom' \| 'top'` | `'auto'` | Menu placement preference. |
 | `menuPosition` | `'absolute' \| 'fixed'` | `'absolute'` | CSS positioning mode. |
 | `menuShouldBlockScroll` | `boolean` | `false` | Block page scroll when menu is open. |
-| `menuShouldScrollIntoView` | `boolean` | `!isMobileDevice()` | Auto-scroll menu into viewport on open. |
+| `menuShouldScrollIntoView` | `boolean` | `isMobileDevice()` | Auto-scroll menu into viewport on open. |
 | `minInputLength` | `number` | `0` | Min chars before menu/results. |
 | `minMenuHeight` | `number` | `140` | Minimum menu height. |
 | `multiple` | `boolean` | `false` | Enable multi-value mode. |

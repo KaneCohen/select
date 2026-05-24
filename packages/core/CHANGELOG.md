@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.12.0
+
+### Minor Changes
+
+- Refactor props watching on Vue 3. Async options handling. Auto Scroll behavior.
+
 ## 0.11.1
 
 ### Patch Changes

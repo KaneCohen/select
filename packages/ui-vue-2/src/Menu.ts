@@ -32,7 +32,7 @@ export default Vue.extend({
   },
 
   render(h: CreateElement): VNode {
-    const { select, options, slots } = this.$props;
+    const { select, options, slots, state } = this.$props;
     const value = select.getValue();
     const focusedOption = select.getFocusedOption();
     const children: VNode[] = [];
@@ -88,17 +88,28 @@ export default Vue.extend({
       }
     });
 
-
-
+    if (!children.length) {
+      if (state.isLoading && select.props.showLoadingMessage) {
+        children.push(h(
+          'div',
+          {
+            class: [select.getThemeClass('loadingMessage'), select.getClass('loadingMessage')]
+          },
+          select.props.loadingMessage
+        ));
+      } else if (select.props.showNoOptionsMessage) {
+        children.push(h(
+          'div',
+          {
+            class: [select.getThemeClass('noOptionsMessage'), select.getClass('noOptionsMessage')]
+          },
+          select.props.noOptionsMessage
+        ));
+      }
+    }
 
     if (!children.length) {
-      children.push(h(
-        'div',
-        {
-          class: [select.getThemeClass('noOptionsMessage')]
-        },
-        select.props.noOptionsMessage
-      ));
+      return null as unknown as VNode;
     }
 
     return h(

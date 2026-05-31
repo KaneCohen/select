@@ -169,6 +169,16 @@ export const selectProps = {
     default: defaults.loading
   },
 
+  showLoadingMessage: {
+    type: Boolean,
+    default: defaults.showLoadingMessage
+  },
+
+  showNoOptionsMessage: {
+    type: Boolean,
+    default: defaults.showNoOptionsMessage
+  },
+
   loadingMessage: {
     type: [String, Function],
     default: defaults.loadingMessage

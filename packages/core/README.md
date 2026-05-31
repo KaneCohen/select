@@ -96,7 +96,9 @@ select.on('change', (value, actionMeta) => {
 | `isOptionSelected` | `(option, value) => boolean \| null` | `null` | Selected-state predicate override. |
 | `keyMap` | `Record<string,string>` | built-in map | Keyboard action mapping. |
 | `loading` | `boolean` | `false` | Loading state flag. |
-| `loadingMessage` | `string \| fn` | `'Loading...'` | Message while loading options. |
+| `showLoadingMessage` | `boolean` | `true` | Whether to show loading message. |
+| `showNoOptionsMessage` | `boolean` | `true` | Whether to show no options message. |
+| `loadingMessage` | `string \| () => string` | `() => 'Loading...'` | Message while loading options. |
 | `maxValues` | `number` | `undefined` | Max selected values (multi mode). |
 | `maxOptions` | `number` | `undefined` | Max rendered options. |
 | `maxMenuHeight` | `number` | `300` | Max menu height before scroll. |

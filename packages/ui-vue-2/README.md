@@ -112,6 +112,8 @@ const options = [
 | `cacheOptions` | `boolean` | `true` | Caches async results by input value. |
 | `isLoading` | `boolean` | `undefined` | Manual loading state override. |
 | `loading` | `boolean` | `false` | General loading flag. |
+| `showLoadingMessage` | `boolean` | `true` | Whether to show loading message. |
+| `showNoOptionsMessage` | `boolean` | `true` | Whether to show no options message. |
 | `loadingMessage` | `string \| (input) => string` | `'Loading...'` | Message shown while loading options. |
 | `noOptionsMessage` | `string \| () => string` | `() => 'No options'` | Message when no options are available. |
 | `open` | `boolean` | `undefined` | Controlled menu open state. |

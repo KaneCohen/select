@@ -16,7 +16,7 @@ export default {
       h(Control, { props })
     ];
 
-    if (state.isOpen && options.length) {
+    if (state.isOpen) {
       children.push(h(Menu, {props: {...props, options}}));
     }
 

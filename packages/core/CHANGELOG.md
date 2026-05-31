@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.14.0
+
+### Minor Changes
+
+- Update loading/options message. Update theme to include dark colors.
+
 ## 0.13.0
 
 ### Minor Changes

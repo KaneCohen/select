@@ -65,7 +65,9 @@ export const selectConfigs: SelectConfigs = {
     'NumpadEnter': 'Select', // Numpad Enter
   },
   loading: false,
-  loadingMessage: 'Loading...',
+  showLoadingMessage: true,
+  showNoOptionsMessage: true,
+  loadingMessage: () => 'Loading...',
   maxValues: undefined,
   maxOptions: undefined,
   maxMenuHeight: 300,

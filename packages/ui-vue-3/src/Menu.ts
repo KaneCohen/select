@@ -106,13 +106,27 @@ export default defineComponent({
       });
 
       if (!children.length) {
-        children.push(h(
-          'div',
-          {
-            class: [select.getThemeClass('noOptionsMessage')]
-          },
-          select.props.noOptionsMessage
-        ));
+        if (props.state.isLoading && select.props.showLoadingMessage) {
+          children.push(h(
+            'div',
+            {
+              class: [select.getThemeClass('loadingMessage'), select.getClass('loadingMessage')]
+            },
+            select.props.loadingMessage
+          ));
+        } else if (select.props.showNoOptionsMessage) {
+          children.push(h(
+            'div',
+            {
+              class: [select.getThemeClass('noOptionsMessage'), select.getClass('noOptionsMessage')]
+            },
+            select.props.noOptionsMessage
+          ));
+        }
+      }
+
+      if (!children.length) {
+        return null as unknown as VNode;
       }
 
       return h(

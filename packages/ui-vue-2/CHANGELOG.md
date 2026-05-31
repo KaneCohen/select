@@ -1,5 +1,16 @@
 # @cohensive/select-vue-2
 
+## 0.14.0
+
+### Minor Changes
+
+- Update loading/options message. Update theme to include dark colors.
+
+### Patch Changes
+
+- Updated dependencies
+  - @cohensive/select-core@0.14.0
+
 ## 0.13.0
 
 ### Minor Changes

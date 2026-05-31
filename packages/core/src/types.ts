@@ -305,9 +305,19 @@ export type SelectConfigs = {
   loading?: boolean;
 
   /**
+   * Whether to show the loading message.
+   */
+  showLoadingMessage?: boolean;
+
+  /**
+   * Whether to show the no options message.
+   */
+  showNoOptionsMessage?: boolean;
+
+  /**
    * Text to display when loading options.
    */
-  loadingMessage?: LoadingMessage;
+  loadingMessage?: string | (() => string);
 
   /**
    * Prevents setting of more options than specified.
@@ -646,11 +656,6 @@ export type GetOptionValue<Option> = (option: Option) => any;
 export type IsOptionDisabled = (option: Option, value: Value) => boolean;
 
 export type IsOptionSelected = (option: Option, value: Value) => boolean;
-
-export type LoadingMessage =
-  | ((inputValue: string) => string | null)
-  | string
-  | null;
 
 export type ComponentClassMixin = {
   methods: Object;

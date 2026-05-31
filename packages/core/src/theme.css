@@ -3,11 +3,11 @@
 }
 
 .vue-select__control {
-  @apply flex flex-wrap items-center justify-between border border-solid outline-none border-gray-300 rounded-md shadow-sm;
+  @apply flex flex-wrap items-center justify-between border border-gray-300 border-solid rounded-md shadow-sm outline-none dark:bg-gray-950 dark:border-gray-700;
 }
 
 .vue-select__control--is-focused {
-  @apply ring ring-gray-200 ring-opacity-50;
+  @apply ring ring-gray-200 ring-opacity-50 dark:ring-gray-700 dark:ring-opacity-50;
 }
 
 .vue-select__value-container {
@@ -15,7 +15,7 @@
 }
 
 .vue-select__multiple-value-container {
-  @apply flex flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5;
+  @apply flex flex-wrap items-center flex-1 gap-1.5 p-1 pl-1.5 pr-0 overflow-hidden;
 }
 
 .vue-select__placeholder {
@@ -27,7 +27,7 @@
 }
 
 .vue-select__multiple-value {
-  @apply flex items-stretch content-center m-0.5 first:ml-0 overflow-hidden rounded box-border bg-gray-300;
+  @apply box-border flex items-stretch content-center overflow-hidden bg-gray-300 rounded dark:bg-gray-700;
 }
 
 .vue-select__multiple-value--is-focused {
@@ -35,23 +35,23 @@
 }
 
 .vue-select__multiple-value-label {
-  @apply p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs;
+  @apply p-1 pl-2 overflow-hidden text-xs text-ellipsis whitespace-nowrap;
 }
 
 .vue-select__multiple-value-remove {
-  @apply flex items-center px-1 rounded box-border border-0 bg-transparent opacity-50 hover:opacity-100;
+  @apply box-border flex items-center px-1 bg-transparent border-0 rounded opacity-50 hover:opacity-100 dark:fill-gray-300;
 }
 
 .vue-select__input-container {
-  @apply inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3 h-full mx-0.5;
+  @apply inline-grid flex-auto h-full col-start-1 col-end-3 row-start-1 row-end-2;
 }
 
 .vue-select__input {
-  @apply w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-none outline-0 border-0 ring-0 bg-transparent focus:outline-0 focus:ring-0;
+  @apply w-full col-start-2 col-end-auto row-start-1 row-end-auto p-0 bg-transparent border-0 outline-none outline-0 ring-0 focus:outline-0 focus:ring-0;
 }
 
 .vue-select__input-sizer {
-  @apply row-start-1 col-start-2 invisible whitespace-pre;
+  @apply invisible col-start-2 row-start-1 whitespace-pre;
 }
 
 .vue-select__indicators {
@@ -63,11 +63,11 @@
 }
 
 .vue-select__loading-indicator-dot {
-  @apply w-1.5 h-1.5 rounded-lg bg-gray-400;
+  @apply w-1.5 h-1.5 rounded-lg bg-gray-400 dark:bg-gray-200;
 }
 
 .vue-select__clear-indicator {
-  @apply flex items-center p-2 transition-opacity opacity-20 hover:opacity-50 focus-visible:opacity-50;
+  @apply flex items-center p-2 transition-opacity opacity-20 hover:opacity-50 focus-visible:opacity-50 dark:fill-gray-200;
 }
 
 .vue-select__clear-indicator--is-focused {
@@ -75,7 +75,7 @@
 }
 
 .vue-select__indicator-separator {
-  @apply self-stretch w-px my-2 bg-gray-300;
+  @apply self-stretch w-px my-2 bg-gray-300 dark:bg-gray-700;
 }
 
 .vue-select__dropdown-indicator {
@@ -87,7 +87,7 @@
 }
 
 .vue-select__menu {
-  @apply absolute z-10 w-full my-2 py-1 overflow-auto border border-solid border-gray-300 bg-white rounded-md shadow-lg;
+  @apply absolute z-10 w-full py-1 my-2 overflow-auto bg-white border border-gray-300 border-solid rounded-md shadow-lg dark:border-gray-700 dark:bg-gray-800;
 }
 
 .vue-select__menu--top {
@@ -98,15 +98,19 @@
   @apply top-full;
 }
 
+.vue-select__loading-message {
+  @apply text-center text-gray-400 dark:text-gray-600;
+}
+
 .vue-select__no-options-message {
-  @apply text-center text-gray-400;
+  @apply text-center text-gray-400 dark:text-gray-600;
 }
 
 .vue-select__group {
 }
 
 .vue-select__group-label {
-  @apply px-2 py-1 pb-0.5 text-xs uppercase text-gray-400;
+  @apply px-2 py-1 pb-0.5 text-xs uppercase text-gray-400 dark:text-gray-600;
 }
 
 .vue-select__option {
@@ -114,13 +118,13 @@
 }
 
 .vue-select__option--is-focused {
-  @apply bg-gray-100;
+  @apply bg-gray-100 dark:bg-gray-700;
 }
 
 .vue-select__option--is-selected {
-  @apply bg-blue-100;
+  @apply bg-blue-100 dark:bg-gray-600;
 }
 
 .vue-select__option--is-disabled {
-  @apply text-gray-300;
+  @apply text-gray-300 dark:text-gray-600;
 }

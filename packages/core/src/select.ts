@@ -215,7 +215,7 @@ function buildFocusableOptions(
 class Select extends EventEmitter {
   props: Props;
 
-  abortController: AbortController = new AbortController;
+  abortController: AbortController | null = null;
   instancePrefix: string = '';
   isComposing: boolean = false;
   initialTouchX: number = 0;
@@ -339,7 +339,11 @@ class Select extends EventEmitter {
           return;
         }
 
-        this.abortController.abort();
+        if (this.abortController) {
+          this.abortController?.abort();
+        }
+
+        this.abortController = new AbortController();
 
         if (!inputValue) {
           this.setState({isLoading: false});
@@ -360,6 +364,7 @@ class Select extends EventEmitter {
             this.setState({options: [...options]});
             this.focusOption();
           }).catch((error) => {
+            if (error.name === 'CancelledError') return;
             throw new Error(error);
           }).finally(() => {
             this.setState({isLoading: false});

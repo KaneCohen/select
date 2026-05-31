@@ -11,7 +11,7 @@ export default function Container(props: CommonProps) {
     h(Control, props),
   ];
 
-  if (select.state.isOpen && options.length) {
+  if (select.state.isOpen) {
      children.push(h(Menu, {...props, options}));
   }
 

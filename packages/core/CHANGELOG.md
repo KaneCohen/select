@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.14.1
+
+### Patch Changes
+
+- Tweak container sizing in theme.
+
 ## 0.14.0
 
 ### Minor Changes

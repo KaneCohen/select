@@ -38,7 +38,7 @@ export const theme = {
   control: (props: ControlProps) => {
     return `flex flex-wrap items-center justify-between outline-none border border-solid bg-white border-gray-300 dark:bg-gray-950 dark:border-gray-700 rounded-md shadow-sm ${props.focused ? 'ring ring-gray-200 dark:ring-gray-700 ring-opacity-50 dark:ring-opacity-50' : ''}`;
   },
-  valueContainer: 'grid flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5',
+  valueContainer: 'grid flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5 mx-0.5',
   multipleValueContainer: 'flex flex-1 flex-wrap items-center overflow-hidden p-1.5 pr-0 gap-1.5',
   placeholder: 'row-start-1 col-start-1 row-end-2 col-end-3',
   value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full mx-0.5 whitespace-pre text-ellipsis overflow-hidden',

@@ -19,11 +19,11 @@
 }
 
 .vue-select__placeholder {
-  @apply row-start-1 col-start-1 row-end-2 col-end-3 mx-0.5;
+  @apply col-start-1 col-end-3 row-start-1 row-end-2;
 }
 
 .vue-select__value {
-  @apply row-start-1 col-start-1 row-end-2 col-end-3 max-w-full mx-0.5 whitespace-pre text-ellipsis overflow-hidden;
+  @apply max-w-full col-start-1 col-end-3 row-start-1 row-end-2 overflow-hidden whitespace-pre text-ellipsis;
 }
 
 .vue-select__multiple-value {

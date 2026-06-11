@@ -1,5 +1,13 @@
 # @cohensive/select-vue-2
 
+## 0.14.2
+
+### Patch Changes
+
+- Update theme. Abort remote request on cache hit.
+- Updated dependencies
+  - @cohensive/select-core@0.14.2
+
 ## 0.14.0
 
 ### Minor Changes

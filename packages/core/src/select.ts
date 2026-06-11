@@ -336,11 +336,8 @@ class Select extends EventEmitter {
         if (cachedOptions) {
           this.setState({options: cachedOptions});
           this.focusOption();
-          return;
-        }
-
-        if (this.abortController) {
           this.abortController?.abort();
+          return;
         }
 
         this.abortController = new AbortController();

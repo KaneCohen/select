@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.14.2
+
+### Patch Changes
+
+- Update theme. Abort remote request on cache hit.
+
 ## 0.14.1
 
 ### Patch Changes

@@ -23,7 +23,7 @@ import {
   MenuState,
   CoercedMenuPlacement
 } from './types';
-import { debounce, cleanValue, isDocumentElement, notNullish, scrollIntoView } from './utils';
+import { debounce, cleanValue, isDocumentElement, notNullish, scrollIntoView, Throttler } from './utils';
 import { getMenuPlacement, scrollToMenu } from './utils/menuPlacement';
 
 let instanceId = 0;
@@ -224,7 +224,7 @@ class Select extends EventEmitter {
   openAfterFocus: boolean = false;
   scrollToFocusedOptionOnUpdate: boolean = false;
   blockOptionHover: boolean = false;
-  asyncInputChange: (inputValue: string) => void = () => {};
+  asyncInputChange: Throttler<[inputValue: string]> | null = null;
   asyncCache: {[name: string]: OptionsOrGroups} = {};
 
   protected _state: State;
@@ -334,13 +334,10 @@ class Select extends EventEmitter {
       this.asyncInputChange = debounce((inputValue: string) => {
         const cachedOptions = this.getAsyncCache(inputValue);
         if (cachedOptions) {
-          this.setState({options: cachedOptions});
+          this.setState({options: cachedOptions, isLoading: false});
           this.focusOption();
-          this.abortController?.abort();
           return;
         }
-
-        this.abortController = new AbortController();
 
         if (!inputValue) {
           this.setState({isLoading: false});
@@ -353,18 +350,25 @@ class Select extends EventEmitter {
           this.focusOption();
         };
 
+        this.abortController?.abort();
+        const controller = this.abortController = new AbortController();
         const promise = loadOptions(inputValue, this.props, this.abortController, callback);
 
         if (promise) {
           promise.then((options) => {
+            // Only set options if we are on the same input - otherwise just save cache
             this.setAsyncCache(inputValue, [...options]);
-            this.setState({options: [...options]});
-            this.focusOption();
+            if (inputValue == this._state.inputValue) {
+              this.setState({options: [...options]});
+              this.focusOption();
+            }
           }).catch((error) => {
-            if (error.name === 'CancelledError') return;
+            if (error.name === 'CanceledError') return;
             throw new Error(error);
           }).finally(() => {
-            this.setState({isLoading: false});
+            if (!controller.signal.aborted) {
+              this.setState({isLoading: false});
+            }
           });
         }
       }, this.props.asyncOptions.delay);
@@ -687,15 +691,16 @@ class Select extends EventEmitter {
     this.onInputChange(inputValue, { action: 'input-change', prevInputValue });
 
     if (inputValue.length >= minInputLength) {
-      if (async) {
+      if (async && this.asyncInputChange) {
         const cachedOptions = this.getAsyncCache(inputValue);
         this.setState({
           options: cachedOptions || [],
-          isLoading: cachedOptions ? false : true
         });
         if (!cachedOptions) {
+          this.setState({ isLoading: true });
           this.asyncInputChange(inputValue);
         } else {
+          this.setState({ isLoading: false });
           this.focusOption();
         }
       }

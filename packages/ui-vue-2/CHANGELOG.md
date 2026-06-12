@@ -1,5 +1,13 @@
 # @cohensive/select-vue-2
 
+## 0.14.3
+
+### Patch Changes
+
+- Update async options loading and abort controller behavior.
+- Updated dependencies
+  - @cohensive/select-core@0.14.3
+
 ## 0.14.2
 
 ### Patch Changes

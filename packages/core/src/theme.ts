@@ -41,7 +41,7 @@ export const theme = {
   valueContainer: 'grid flex-1 flex-wrap items-center overflow-hidden px-2 py-0.5 mx-0.5',
   multipleValueContainer: 'flex flex-1 flex-wrap items-center overflow-hidden p-1.5 pr-0 gap-1.5',
   placeholder: 'row-start-1 col-start-1 row-end-2 col-end-3',
-  value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full mx-0.5 whitespace-pre text-ellipsis overflow-hidden',
+  value: 'row-start-1 col-start-1 row-end-2 col-end-3 max-w-full whitespace-pre text-ellipsis overflow-hidden',
   multipleValue: (props: MultipleValueProps) => {
     return `flex items-stretch content-center overflow-hidden rounded box-border bg-gray-300 dark:bg-gray-700 ${props.focused ? 'ring-1 ring-offset-0 ring-offset-black ring-gray-500 ring-inset' : ''}`;
   },

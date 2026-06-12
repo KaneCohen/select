@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.14.4
+
+### Patch Changes
+
+- Tweak margins for single value element.
+
 ## 0.14.3
 
 ### Patch Changes

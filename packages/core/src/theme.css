@@ -39,7 +39,7 @@
 }
 
 .vue-select__multiple-value-remove {
-  @apply box-border flex items-center px-1 bg-transparent border-0 rounded opacity-50 hover:opacity-100 dark:fill-gray-300;
+  @apply box-border flex items-center px-1 bg-transparent border-0 rounded opacity-50 hover:opacity-100 fill-gray-800 dark:fill-gray-300;
 }
 
 .vue-select__input-container {
@@ -67,7 +67,7 @@
 }
 
 .vue-select__clear-indicator {
-  @apply flex items-center p-2 transition-opacity opacity-20 hover:opacity-50 focus-visible:opacity-50 dark:fill-gray-200;
+  @apply flex items-center p-2 transition-opacity opacity-20 hover:opacity-50 focus-visible:opacity-50 fill-gray-800 dark:fill-gray-200;
 }
 
 .vue-select__clear-indicator--is-focused {
@@ -79,7 +79,7 @@
 }
 
 .vue-select__dropdown-indicator {
-  @apply flex items-center p-2 transition-opacity opacity-20 hover:opacity-50 focus-visible:opacity-50;
+  @apply flex items-center p-2 transition-opacity opacity-20 hover:opacity-50 focus-visible:opacity-50 fill-gray-800 dark:fill-gray-200;
 }
 
 .vue-select__dropdown-indicator--is-focused {

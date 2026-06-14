@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.14.5
+
+### Patch Changes
+
+- Add default light color fill for indicators.
+
 ## 0.14.4
 
 ### Patch Changes

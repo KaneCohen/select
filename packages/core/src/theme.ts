@@ -46,7 +46,7 @@ export const theme = {
     return `flex items-stretch content-center overflow-hidden rounded box-border bg-gray-300 dark:bg-gray-700 ${props.focused ? 'ring-1 ring-offset-0 ring-offset-black ring-gray-500 ring-inset' : ''}`;
   },
   multipleValueLabel: 'p-1 pl-2 text-ellipsis overflow-hidden whitespace-nowrap text-xs',
-  multipleValueRemove: 'flex items-center px-1 rounded box-border border-0 bg-transparent opacity-50 hover:opacity-100 dark:fill-gray-300',
+  multipleValueRemove: 'flex items-center px-1 rounded box-border border-0 bg-transparent opacity-50 hover:opacity-100 fill-gray-800 dark:fill-gray-300',
   inputContainer: 'inline-grid flex-auto row-start-1 col-start-1 row-end-2 col-end-3 h-full',
   input: 'w-full p-0 row-start-1 col-start-2 row-end-auto col-end-auto outline-none outline-0 border-0 ring-0 bg-transparent focus:outline-0 focus:ring-0',
   inputSizer: 'row-start-1 col-start-2 invisible whitespace-pre',
@@ -55,7 +55,7 @@ export const theme = {
   loadingIndicatorDot: 'w-1.5 h-1.5 rounded-lg bg-gray-400 dark:bg-gray-200',
   loadingMessage: 'text-center text-gray-400 dark:text-gray-600',
   clearIndicator: (props: ClearIndicatorProps) => {
-    return `flex items-center p-2 transition-opacity dark:fill-gray-200 ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'} focus-visible:opacity-50`;
+    return `flex items-center p-2 transition-opacity fill-gray-800 dark:fill-gray-200 ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'} focus-visible:opacity-50`;
   },
   indicatorSeparator: 'self-stretch w-px my-2 bg-gray-300 dark:bg-gray-700',
   dropdownIndicator: (props: DropdownIndicatorProps) => {

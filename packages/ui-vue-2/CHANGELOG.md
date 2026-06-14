@@ -1,5 +1,13 @@
 # @cohensive/select-vue-2
 
+## 0.14.5
+
+### Patch Changes
+
+- Add default light color fill for indicators.
+- Updated dependencies
+  - @cohensive/select-core@0.14.5
+
 ## 0.14.4
 
 ### Patch Changes

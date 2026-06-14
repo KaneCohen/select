@@ -1,5 +1,13 @@
 # @cohensive/select-vue-2
 
+## 0.14.6
+
+### Patch Changes
+
+- Update theme - dropdown indicator light theme fill.
+- Updated dependencies
+  - @cohensive/select-core@0.14.6
+
 ## 0.14.5
 
 ### Patch Changes

@@ -59,7 +59,7 @@ export const theme = {
   },
   indicatorSeparator: 'self-stretch w-px my-2 bg-gray-300 dark:bg-gray-700',
   dropdownIndicator: (props: DropdownIndicatorProps) => {
-    return `flex items-center p-2 transition-opacity dark:fill-gray-200 ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'} focus-visible:opacity-50`;
+    return `flex items-center p-2 transition-opacity fill-gray-800 dark:fill-gray-200 ${props.focused ? ' opacity-50 hover:opacity-100' : ' opacity-20 hover:opacity-50'} focus-visible:opacity-50`;
   },
   menu: (props: MenuProps) => {
     return `absolute z-10 w-full my-2 py-1 overflow-auto border border-solid border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-800 rounded-md shadow-lg ${props.placement === 'top' ? 'bottom-full' : 'top-full'}`;

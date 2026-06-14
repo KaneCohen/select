@@ -1,5 +1,11 @@
 # @cohensive/select-core
 
+## 0.14.6
+
+### Patch Changes
+
+- Update theme - dropdown indicator light theme fill.
+
 ## 0.14.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@cohensive/select",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Select",
   "private": true,
   "keywords": [
@@ -23,12 +23,12 @@
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.3",
-    "@babel/preset-typescript": "^7.28.5",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
     "@changesets/cli": "^2.31.0",
-    "@preconstruct/cli": "^2.8.12",
-    "@types/node": "^24.10.1",
+    "@preconstruct/cli": "^2.8.13",
+    "@types/node": "^25.9.3",
     "autoprefixer": "^10.5.0",
     "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3"
